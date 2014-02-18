@@ -87,11 +87,34 @@ var_dump($_POST);
 		<label for="q1d">
    		 	<input type="radio" id="q1d" name="q2" value="Yellow">Yellow
 		</label>
-		
+
+		<p>
+			<label for="dayOfWeek">What is your favorite day of the week?</label>
+				<select id="dayOfWeek" name="dayOfWeek[]" multiple>
+					<option value="monday">Monday</option>
+					<option value="tuesday">Tuesday</option>
+					<option value="wedensday">Wednesday</option>
+					<option value="thursday">Thursday</option>
+					<option value="friday">Friday</option>
+					<option value="saturday">Saturday</option>
+					<option value="sunday">Sunday</option>
+				</select>
+		</p>
 		<p>
 		<button type="submit">Submit Answers</button>
 		</p>
 
+	</form>
+
+	<h2>Select Testing:</h2>
+	<form method="POST" action="">
+		<label for="drivecar">Do you drive a car?</label>
+		<select id="drivecar" name="drivecar">
+			<option value=1>Yes</option>
+			<option value=0>No</option>
+		</select>
+
+		<button type="submit">Submit Answer</button>
 	</form>
 
 </body>
