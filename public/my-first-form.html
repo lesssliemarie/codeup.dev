@@ -5,6 +5,7 @@
 </head>
 <body>
 	
+	<h2>User Login</h2>
 	<form method="POST" action="http://requestb.in/1c7ksu21">
 	    <p>
 	        <label for="username">Username</label>
@@ -17,6 +18,28 @@
 	    <p>
 	        <button type="submit">Login</button>
 	    </p>
+	</form>
+
+	<h2>Compose an Email</h2>
+	<form method="POST" action="http://requestb.in/1c7ksu21">
+		<p>
+			<label for"recipient">To:</label>
+			<input id="recipient" name="recipient" placeholder="Recipient Email" type="text">
+		</p>
+		<p>
+			<label for"sender">From:</label>
+			<input id="sender" name="sender" placeholder="Sender Email" type="text">
+		</p>
+		<p>
+			<label for"subject">Subject:</label>
+			<input id="subject" name="subject" placeholder="Subject" type="text">
+		</p>
+		<p>
+			<textarea id="emailBody" name="emailBody" placeholder="Type message here..." rows="30" cols="50"></textarea>
+		</p>
+		<p>
+			<button type="submit">Send Email</button>
+		</p>
 	</form>
 
 </body>
