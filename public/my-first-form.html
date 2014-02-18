@@ -38,8 +38,58 @@
 			<textarea id="emailBody" name="emailBody" placeholder="Type message here..." rows="30" cols="50"></textarea>
 		</p>
 		<p>
+			<label for="copyEmail">
+				<input id="copyEmail" name="copyEmail" type="checkbox" value="yes" checked> Do you want to save a copy of your email?
+			</label>
+		</p>
+		<p>
 			<button type="submit">Send Email</button>
 		</p>
+	</form>
+
+	<h2>Multiple Choice Test</h2>
+	<form method="POST" action="http://requestb.in/1c7ksu21">
+		
+		<p>What's your favorite US state?</p>
+		<label for="q1a">
+    		<input type="radio" id="q1a" name="q1" value="Texas">TEXAS
+		</label>
+		<label for="q1b">
+    		<input type="radio" id="q1b" name="q1" value="Texas">TEXAS
+		</label>
+		<label for="q1c">
+    		<input type="radio" id="q1c" name="q1" value="Texas">TEXAS
+		</label>
+		<label for="q1d">
+   		 	<input type="radio" id="q1d" name="q1" value="Texas">TEXAS
+		</label>
+	
+		<p>What's your favorite color?</p>
+		<label for="q1a">
+    		<input type="radio" id="q1a" name="q2" value="purple">Purple
+		</label>
+		<label for="q1b">
+    		<input type="radio" id="q1b" name="q2" value="green">Green
+		</label>
+		<label for="q1c">
+    		<input type="radio" id="q1c" name="q2" value="aqua">Aqua
+		</label>
+		<label for="q1d">
+   		 	<input type="radio" id="q1d" name="q2" value="Yellow">Yellow
+		</label>
+
+		<p>Did you bring your lunch today?</p>
+		<label for="q3a">
+			<input type="checkbox" id="q3a" name="q3" value="yes">Yes
+		</label>
+		<label for="q3b">
+			<input type="checkbox" id="q3b" name="q3" value="no">No
+		</label>
+		
+		<p>
+		<button type="submit">Submit Answers</button>
+		</p>
+
 	</form>
 
 </body>
