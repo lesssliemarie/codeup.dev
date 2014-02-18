@@ -31,7 +31,7 @@ var_dump($_POST);
 	</form>
 
 	<h2>Compose an Email</h2>
-	<form method="POST" action="http://requestb.in/1c7ksu21">
+	<form method="POST" action="">
 		<p>
 			<label for"recipient">To:</label>
 			<input id="recipient" name="recipient" placeholder="Recipient Email" type="text">
@@ -58,7 +58,7 @@ var_dump($_POST);
 	</form>
 
 	<h2>Multiple Choice Test</h2>
-	<form method="POST" action="http://requestb.in/1c7ksu21">
+	<form method="POST" action="">
 		
 		<p>What's your favorite US state?</p>
 		<label for="q1a">
