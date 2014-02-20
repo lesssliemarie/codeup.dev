@@ -17,15 +17,14 @@
 
 		for (i = 0; i < 50; i++){
 
-			if (i % 2 != 0) {
+			if (i % 2 == 0) {
+				continue;
+			} else {
 				if (i == random) {
 					console.log('Yipes! Skipping number: ' + i);
 					continue;
 				}
 				console.log('Here is an odd number: ' + i);
-			} else {
-				// i is even, evens are stupid
-				continue;
 			}
 		}
 
