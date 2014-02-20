@@ -1,0 +1,66 @@
+<html>
+<head>
+	<title>Order A Pizza</title>
+</head>
+<body>
+
+	<script>
+		var addTopping = function(pizza, topping) {
+			switch(topping) {
+				case 'cheese':
+					pizza.push(" cheese");
+					break;
+				case 'pepperoni':
+					pizza.push(" pepperoni");
+					break;
+				case 'olives':
+					pizza.push(" olives");
+					break;
+				case 'mushrooms':
+					pizza.push(" mushrooms");
+					break;
+				case 'peppers':
+					pizza.push(" peppers");
+					break;
+				case 'onions':
+					pizza.push(" onions");
+					break;
+				case 'HOTSAUCE':
+					pizza.push(" HOTSAUCE");
+					break;
+				default:
+					pizza.push("No toppings? BORING.");
+			}
+			return pizza;
+		}
+
+		console.log('Topping Options: cheese, pepperoni, olives, mushrooms, peppers, onions, HOTSAUCE.');
+
+		var pizza = [];
+		var topping = prompt('Add a topping: ');
+		pizza = addTopping(pizza, topping);
+
+		console.log('You ordered a pizza with: ' + pizza);
+
+		var addMore = true;
+		while (addMore == true) {
+
+			var addAnother = prompt('Add another topping? yes/no ');
+			if (addAnother == 'yes') {
+				topping = prompt('Add a topping: ');
+				pizza = addTopping(pizza, topping);
+				console.log('You ordered a pizza with: ' + pizza);
+			} else {
+				console.log('Enjoy your pizza!');
+				addMore = false;
+			}
+		} 
+
+
+
+
+
+	</script>
+
+</body>
+</html>
