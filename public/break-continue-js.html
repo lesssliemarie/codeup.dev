@@ -1,0 +1,34 @@
+<html>
+<head>
+	<title>Break - Continue JS</title>
+</head>
+<body>
+	<script>
+		var random = Math.floor((Math.random()*50)+1);
+
+		while (random % 2 == 0) {
+			random = Math.floor((Math.random()*50)+1);
+			if (random % 2 != 0) {
+				break;	
+			}		 
+		} 
+
+		console.log('Random odd number to skip is: ' + random);
+
+		for (i = 0; i < 50; i++){
+
+			if (i % 2 != 0) {
+				if (i == random) {
+					console.log('Yipes! Skipping number: ' + i);
+					continue;
+				}
+				console.log('Here is an odd number: ' + i);
+			} else {
+				// i is even, evens are stupid
+				continue;
+			}
+		}
+
+	</script>
+</body>
+</html>
