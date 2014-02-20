@@ -13,12 +13,16 @@
 	console.log('The array "names" has ' + names.length + ' names in it.');
 
 	// todo:
-	// Create log statements that will print each of the names array elements individually.
-	console.log('The first name in the array is ' + names[0]);
-	console.log('The second name in the array is ' + names[1]);
-	console.log('The third name in the array is ' + names[2]);
-	console.log('The fourth name in the array is ' + names[3]);
-	console.log('The fifth name in the array is ' + names[4]);
+	// Refactor into a for loop then a forEach to output names
+	for (i = 0; i < names.length; i++) {
+		console.log('The name at index ' + i + ' is: ' + names[i]);
+	}
+
+	console.log('USING A FOREACH');
+
+	names.forEach(function(element, index, array) {
+		console.log('The name at index ' + index + ' is ' + element);
+	});
 
 	</script>
 
