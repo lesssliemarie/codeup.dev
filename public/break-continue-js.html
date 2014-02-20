@@ -4,8 +4,9 @@
 </head>
 <body>
 	<script>
+		// generate a random number between 1 and 50
 		var random = Math.floor((Math.random()*50)+1);
-
+		// ensure number is odd, if not, regenerate until it is
 		while (random % 2 == 0) {
 			random = Math.floor((Math.random()*50)+1);
 			if (random % 2 != 0) {
@@ -14,7 +15,8 @@
 		} 
 
 		console.log('Random odd number to skip is: ' + random);
-
+		// log all odd numbers
+		// skip random number, log yipes message instead
 		for (i = 0; i < 50; i++){
 
 			if (i % 2 == 0) {
