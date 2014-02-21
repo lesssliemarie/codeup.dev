@@ -7,7 +7,7 @@
 		// todo: Ask the user for their name.
 		// Keep asking if an empty input is provided.
 		var name = prompt('Enter your name, dude.');
-		while (name == '') {
+		while (name === '' || name == 'null') {
 			name = prompt('Enter your name, dude.');
 		}
 
