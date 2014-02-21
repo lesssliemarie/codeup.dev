@@ -3,6 +3,7 @@
 	<title>Order A Pizza</title>
 </head>
 <body>
+	<h1>WHATCHA WANT ON YOUR PIZZA, DUDE?</h1>
 	<script>
 		function addTopping(pizza, topping) {
 			switch(topping) {
@@ -32,15 +33,14 @@
 			}
 			return pizza;
 		}
-		alert('ORDER A PIZZA, YAY!');
 
-		alert('Topping Options: cheese, pepperoni, olives, mushrooms, peppers, onions, HOTSAUCE.');
+		console.log('Topping Options: cheese, pepperoni, olives, mushrooms, peppers, onions, HOTSAUCE.');
 
 		var pizza = [];
 		var topping = prompt('Add a topping: ');
 		pizza = addTopping(pizza, topping);
 
-		alert('You ordered a pizza with:' + pizza);
+		console.log('You ordered a pizza with:' + pizza);
 
 		var addMore = true;
 		while (addMore == true) {
@@ -49,9 +49,9 @@
 			if (addAnother == 'yes') {
 				topping = prompt('Add a topping: ');
 				pizza = addTopping(pizza, topping);
-				alert('You ordered a pizza with: ' + pizza);
+				console.log('You ordered a pizza with: ' + pizza);
 			} else {
-				alert('Enjoy your pizza!');
+				console.log('Enjoy your pizza!');
 				addMore = false;
 			}
 		} 
