@@ -6,13 +6,13 @@
 	<script>
 		// todo: Ask the user for their name.
 		// Keep asking if an empty input is provided.
-		var name = prompt('Enter your name, dude.');
-		while (name === '' || name == 'null') {
-			name = prompt('Enter your name, dude.');
+		var username = prompt('Enter your name, dude.');
+		while (username === '' || username == null) {
+			username = prompt('Enter your name, dude.');
 		}
 
 		// todo: Show an alert message that welcomes the user based on their input.
-		alert('Welcome ' + name + '!');
+		alert('Welcome ' + username + '!');
 
 		// todo: Ask the user if they like pizza.
 		// Based on their answer tell show a creative alert message.
