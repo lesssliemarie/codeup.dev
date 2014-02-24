@@ -1,4 +1,6 @@
 <?php
+session_start();
+$_SESSION = array();
 
 function read_file($file) {
     $handle = fopen($file, "r");
@@ -19,9 +21,12 @@ $items = read_file("data/todo_list.txt");
 if (!empty($_POST)) {
 	array_push($items, $_POST['newItem']);			
 	save_file("data/todo_list.txt", $items);
+	session_destroy();
+	header("Location: todo-list.php");
 }
 
 var_dump($_POST);
+
 
 ?>
 
@@ -42,7 +47,7 @@ var_dump($_POST);
 
 
 		<h3>Add a TODO List item:</h3>
-		<form method="POST" action="">
+		<form method="POST" action="todo-list.php">
 			<p>
 				<label for="newItem">New Item:</label>
 				<input id="newItem" name="newItem" type="text">
