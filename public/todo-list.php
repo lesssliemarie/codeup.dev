@@ -32,8 +32,7 @@ if (!empty($_POST)) {
 
 if (!empty($_GET)) {
 	array_splice($items, $_GET['remove'], 1);
-	$items = array_values($items);
-	save_file("data/todo_list.txt", $items);
+	save_file($file, $items);
 	header("Location: todo-list.php");
 }
 
