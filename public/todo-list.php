@@ -2,9 +2,16 @@
 
 function read_file($file) {
     $handle = fopen($file, "r");
-    $contents = fread($handle, filesize($file));
-    fclose($handle);
-    return explode("\n", $contents);
+    $setFile = filesize($file);
+    if ($setFile > 0) {
+	   	$contents = fread($handle, filesize($file));
+	    fclose($handle);
+	    return explode("\n", $contents); 	
+    } else {
+    	echo "You don't have any items on your list!";
+    	return array();
+    }
+
 }
 
 function save_file($filePath, $array) {
