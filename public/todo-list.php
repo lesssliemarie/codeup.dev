@@ -14,14 +14,15 @@ function read_file($file) {
 
 }
 
-function save_file($filePath, $array) {
-    $handle = fopen($filePath, 'w');
+function save_file($file, $array) {
+    $handle = fopen($file, 'w');
     $saveList = implode("\n", $array);
     fwrite($handle, $saveList);
     fclose($handle);
 }
 
-$items = read_file("data/todo_list.txt");
+$file = "data/todo_list.txt";
+$items = read_file($file);
 
 if (!empty($_POST)) {
 	array_push($items, $_POST['newItem']);
