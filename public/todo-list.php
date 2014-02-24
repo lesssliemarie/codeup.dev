@@ -1,13 +1,3 @@
-<?php
-
-echo "<p>GET:</p>";
-var_dump($_GET);
-
-echo "<p>POST:</p>";
-var_dump($_POST);
-
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,11 +6,16 @@ var_dump($_POST);
 <body>
 
 	<h2>TODO List</h2>
+		<?php 
+			$listItems = array('Finish php challenges', 'Make JS game', 'Make grooming appt for Jimi');
+		?>
 		<ul>
-			<li>Finish php challenges</li>
-			<li>Make JS game</li>
-			<li>Make grooming appt for Jimi</li>
+			<?php foreach ($listItems as $item) {
+				echo "<li>$item</li>";
+			}
+			?>
 		</ul>
+
 
 		<h3>Add a TODO List item:</h3>
 		<form method="POST" action="">
