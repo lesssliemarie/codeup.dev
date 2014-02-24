@@ -30,14 +30,11 @@ if (!empty($_POST)) {
 }
 
 if (!empty($_GET)) {
-	array_splice($items, $_GET["remove"], 1);
+	array_splice($items, $_GET['remove'], 1);
 	$items = array_values($items);
 	save_file("data/todo_list.txt", $items);
 	header("Location: todo-list.php");
 }
-
-var_dump($_POST);
-var_dump($_GET);
 
 ?>
 
@@ -60,7 +57,7 @@ var_dump($_GET);
 		<form method="POST" action="todo-list.php">
 			<p>
 				<label for="newItem">New Item:</label>
-				<input id="newItem" name="newItem" type="text">
+				<input id="newItem" name="newItem" type="text" autofocus="autofocus">
 			</p>
 
 			<button type="submit">Add Item</button>
