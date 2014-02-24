@@ -7,7 +7,21 @@ function read_file($file) {
     return explode("\n", $contents);
 }
 
+function save_file($filePath, $array) {
+    $handle = fopen($filePath, 'w');
+    $saveList = implode("\n", $array);
+    fwrite($handle, $saveList);
+    fclose($handle);
+}
+
 $items = read_file("data/todo_list.txt");
+
+if (!empty($_POST)) {
+	array_push($items, $_POST['newItem']);			
+	save_file("data/todo_list.txt", $items);
+}
+
+var_dump($_POST);
 
 ?>
 
