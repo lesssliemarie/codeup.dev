@@ -1,3 +1,16 @@
+<?php
+
+function read_file($file) {
+    $handle = fopen($file, "r");
+    $contents = fread($handle, filesize($file));
+    fclose($handle);
+    return explode("\n", $contents);
+}
+
+$items = read_file("data/todo_list.txt");
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,11 +19,8 @@
 <body>
 
 	<h2>TODO List</h2>
-		<?php 
-			$listItems = array('Finish php challenges', 'Make JS game', 'Make grooming appt for Jimi');
-		?>
 		<ul>
-			<?php foreach ($listItems as $item) {
+			<?php foreach ($items as $item) {
 				echo "<li>$item</li>";
 			}
 			?>
