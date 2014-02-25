@@ -70,7 +70,7 @@ if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0 && $_FILES['file1']['ty
 	<h2>TODO List</h2>
 		<ul>
 			<? foreach ($items as $key => $item): ?>
-				<li><?= $item; ?> <a href="?remove=<?= $key; ?>"> Mark Complete </a></li>
+				<li><?= htmlspecialchars(strip_tags($item)); ?> <a href="?remove=<?= $key; ?>"> Mark Complete </a></li>
 			<? endforeach; ?>
 		</ul>
 
