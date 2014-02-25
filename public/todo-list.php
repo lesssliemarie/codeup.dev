@@ -15,13 +15,6 @@ function save_file($file, $array) {
     fclose($handle);
 }
 
-function add_file($file) {
-	$handle = fopen($file, "r");
-   	$contents = fread($handle, filesize($file));
-    fclose($handle);
-    return $contents;
-}
-
 // set file location
 $file = "data/todo_list.txt";
 
