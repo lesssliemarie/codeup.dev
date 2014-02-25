@@ -17,8 +17,8 @@ function save_file($file, $array) {
 
 // set file location
 $file = "data/todo_list.txt";
-$archives = "data/archives.txt";
-
+$archiveFile = "data/archives.txt";
+$archives = read_file($archiveFile);
 // check that file is not empty
 $items = (filesize($file) > 0) ? read_file($file) : array();
 
@@ -31,9 +31,10 @@ if (!empty($_POST['newItem'])) {
 }
 
 // remove items from list
-if (!empty($_GET['remove'])) {
-	$archive = array_splice($items, $_GET['remove'], 1);
-	save_file($archives, $archive);
+if (isset($_GET['remove'])) {
+	$archiveItem = array_splice($items, $_GET['remove'], 1);
+	$archives = array_merge($archives, $archiveItem);
+	save_file($archiveFile, $archives);
 	save_file($file, $items);
 	header("Location: todo-list.php");
 	exit(0);
