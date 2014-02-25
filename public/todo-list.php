@@ -2,16 +2,9 @@
 
 function read_file($file) {
     $handle = fopen($file, "r");
-    $setFile = filesize($file);
-    if ($setFile > 0) {
-	   	$contents = fread($handle, filesize($file));
-	    fclose($handle);
-	    return explode("\n", $contents); 	
-    } else {
-    	echo "You don't have any items on your list!";
-    	return array();
-    }
-
+   	$contents = fread($handle, filesize($file));
+    fclose($handle);
+    return explode("\n", $contents); 	
 }
 
 function save_file($file, $array) {
@@ -22,7 +15,9 @@ function save_file($file, $array) {
 }
 
 $file = "data/todo_list.txt";
-$items = read_file($file);
+// $items = read_file($file);
+
+$items = (filesize($file) > 0) ? read_file($file) : array();
 
 if (!empty($_POST)) {
 	array_push($items, $_POST['newItem']);
