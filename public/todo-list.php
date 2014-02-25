@@ -44,6 +44,7 @@ if (!empty($_GET['remove'])) {
 	exit();
 }
 
+// upload file, if not empty and is text file
 if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0 && $_FILES['file1']['type'] == 'text/plain') {
 	$upload_dir = '/vagrant/sites/codeup.dev/public/uploads/';
 	$filename = basename($_FILES['file1']['name']);
@@ -68,9 +69,9 @@ if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0 && $_FILES['file1']['ty
 
 	<h2>TODO List</h2>
 		<ul>
-			<?php foreach ($items as $key => $item) { ?>
-				<li><?php echo $item ?> <a href="?remove=<?php echo $key; ?>"> Mark Complete </a></li>
-			<?php } ?>
+			<? foreach ($items as $key => $item): ?>
+				<li><?= $item; ?> <a href="?remove=<?= $key; ?>"> Mark Complete </a></li>
+			<? endforeach; ?>
 		</ul>
 
 
