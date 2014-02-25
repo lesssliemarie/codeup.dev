@@ -33,7 +33,7 @@ if (!empty($_POST['newItem'])) {
 	array_push($items, $_POST['newItem']);
 	save_file($file, $items);
 	header("Location: todo-list.php");
-	exit();
+	exit(0);
 }
 
 // remove items from list
@@ -41,7 +41,7 @@ if (!empty($_GET['remove'])) {
 	array_splice($items, $_GET['remove'], 1);
 	save_file($file, $items);
 	header("Location: todo-list.php");
-	exit();
+	exit(0);
 }
 
 // upload file, if not empty and is text file
