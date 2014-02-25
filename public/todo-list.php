@@ -37,23 +37,30 @@ if (!empty($_GET['remove'])) {
 	exit(0);
 }
 
+$errorMessage = '';
 // upload file, if not empty and is text file
-if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0 && $_FILES['file1']['type'] == 'text/plain') {
-	$upload_dir = '/vagrant/sites/codeup.dev/public/uploads/';
-	$filename = basename($_FILES['file1']['name']);
-	$saved_filename = $upload_dir . $filename;
-	move_uploaded_file($_FILES['file1']['tmp_name'], $saved_filename);
-	$fileContents = read_file($saved_filename);
-	
-	if ($_POST['file1'] == TRUE) {
-		$items = $fileContents;
+if (count($_FILES) > 0) {
+	if($_FILES['file1']['error'] != 0) {
+		$errorMessage = 'ERROR UPLOADING FILE.';
+	} elseif ($_FILES['file1']['type'] != 'text/plain') {
+		$errorMessage = 'ERROR: INVALID FILE TYPE.';
 	} else {
-		$items = array_merge($items, $fileContents);
-	}
+		$upload_dir = '/vagrant/sites/codeup.dev/public/uploads/';
+		$filename = basename($_FILES['file1']['name']);
+		$saved_filename = $upload_dir . $filename;
+		move_uploaded_file($_FILES['file1']['tmp_name'], $saved_filename);
+		$fileContents = read_file($saved_filename);
 	
-	save_file($file, $items);		
-	header("Location: todo-list.php");
-	exit(0);
+		if ($_POST['fileO'] == TRUE) {
+			$items = $fileContents;
+		} else {
+			$items = array_merge($items, $fileContents);
+		}
+
+		save_file($file, $items);		
+		header("Location: todo-list.php");
+		exit(0);
+	}
 }
 
 ?>
@@ -80,12 +87,17 @@ if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0 && $_FILES['file1']['ty
 				<input id="newItem" name="newItem" type="text" autofocus="autofocus">
 			</p>
 			<p>
+				<? if (!empty($errorMessage)) : ?>
+				<?= $errorMessage; ?>
+				<? endif; ?>
+			</p>
+			<p>
         		<label for="file1">File to upload: </label>
         		<input id="file1" name="file1" type="file">
     		</p>
     		<p>
         		<label for="fileO">Overwrite file? </label>
-        		<input id="fileO" name="file1" type="checkbox">
+        		<input id="fileO" name="fileO" type="checkbox">
     		</p>
 
 			<button type="submit">Add Item(s)</button>
