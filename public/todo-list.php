@@ -15,7 +15,6 @@ function save_file($file, $array) {
 }
 
 $file = "data/todo_list.txt";
-// $items = read_file($file);
 
 $items = (filesize($file) > 0) ? read_file($file) : array();
 
