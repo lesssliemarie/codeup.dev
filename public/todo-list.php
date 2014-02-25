@@ -15,6 +15,13 @@ function save_file($file, $array) {
     fclose($handle);
 }
 
+function add_file($file) {
+	$handle = fopen($file, "r");
+   	$contents = fread($handle, filesize($file));
+    fclose($handle);
+    return $contents;
+}
+
 // set file location
 $file = "data/todo_list.txt";
 
@@ -22,18 +29,33 @@ $file = "data/todo_list.txt";
 $items = (filesize($file) > 0) ? read_file($file) : array();
 
 // add items to list
-if (!empty($_POST)) {
+if (!empty($_POST['newItem'])) {
 	array_push($items, $_POST['newItem']);
-	save_file("data/todo_list.txt", $items);
+	save_file($file, $items);
 	header("Location: todo-list.php");
+	exit();
 }
 
 // remove items from list
-if (!empty($_GET)) {
+if (!empty($_GET['remove'])) {
 	array_splice($items, $_GET['remove'], 1);
 	save_file($file, $items);
 	header("Location: todo-list.php");
+	exit();
 }
+
+if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0) {
+	$upload_dir = '/vagrant/sites/codeup.dev/public/uploads/';
+	$filename = basename($_FILES['file1']['name']);
+	$saved_filename = $upload_dir . $filename;
+	move_uploaded_file($_FILES['file1']['tmp_name'], $saved_filename);
+	$fileContents = read_file($saved_filename);
+	$items = array_merge($items, $fileContents);
+	save_file($file, $items);
+	header("Location: todo-list.php");
+	exit(0);
+}
+
 
 ?>
 
@@ -53,13 +75,17 @@ if (!empty($_GET)) {
 
 
 		<h3>Add a TODO List item:</h3>
-		<form method="POST" action="todo-list.php">
+		<form method="POST" enctype="multipart/form-data" action="todo-list.php">
 			<p>
 				<label for="newItem">New Item:</label>
 				<input id="newItem" name="newItem" type="text" autofocus="autofocus">
 			</p>
+			<p>
+        		<label for="file1">File to upload: </label>
+        		<input id="file1" name="file1" type="file">
+    		</p>
 
-			<button type="submit">Add Item</button>
+			<button type="submit">Add Item(s)</button>
 		</form>
 
 </body>
