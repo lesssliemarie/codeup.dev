@@ -44,12 +44,17 @@ if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0 && $_FILES['file1']['ty
 	$saved_filename = $upload_dir . $filename;
 	move_uploaded_file($_FILES['file1']['tmp_name'], $saved_filename);
 	$fileContents = read_file($saved_filename);
-	$items = array_merge($items, $fileContents);
+	
+	if ($_POST['file1'] == TRUE) {
+		$items = $fileContents;
+	} else {
+		$items = array_merge($items, $fileContents);
+	}
+	
 	save_file($file, $items);		
 	header("Location: todo-list.php");
 	exit(0);
 }
-
 
 ?>
 
@@ -77,6 +82,10 @@ if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0 && $_FILES['file1']['ty
 			<p>
         		<label for="file1">File to upload: </label>
         		<input id="file1" name="file1" type="file">
+    		</p>
+    		<p>
+        		<label for="fileO">Overwrite file? </label>
+        		<input id="fileO" name="file1" type="checkbox">
     		</p>
 
 			<button type="submit">Add Item(s)</button>
