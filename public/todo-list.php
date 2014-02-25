@@ -1,5 +1,5 @@
 <?php
-
+// read from txt file, return array
 function read_file($file) {
     $handle = fopen($file, "r");
    	$contents = fread($handle, filesize($file));
@@ -7,6 +7,7 @@ function read_file($file) {
     return explode("\n", $contents); 	
 }
 
+// save to array txt file
 function save_file($file, $array) {
     $handle = fopen($file, 'w');
     $saveList = implode("\n", $array);
@@ -14,16 +15,20 @@ function save_file($file, $array) {
     fclose($handle);
 }
 
+// set file location
 $file = "data/todo_list.txt";
 
+// check that file is not empty
 $items = (filesize($file) > 0) ? read_file($file) : array();
 
+// add items to list
 if (!empty($_POST)) {
 	array_push($items, $_POST['newItem']);
 	save_file("data/todo_list.txt", $items);
 	header("Location: todo-list.php");
 }
 
+// remove items from list
 if (!empty($_GET)) {
 	array_splice($items, $_GET['remove'], 1);
 	save_file($file, $items);
