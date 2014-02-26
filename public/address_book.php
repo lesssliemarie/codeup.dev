@@ -47,6 +47,10 @@ if (!empty($_POST)) {
 	// set error message to string
 	$errorMessage = implode("\n", $errorMessage);
 	// if passed validation, push new contact to $addressBook array
+	foreach ($_POST as $key => $value) {
+		$_POST[$key] = htmlspecialchars(strip_tags($value));
+	}
+
 	$contact = $_POST;
 	array_push($addressBook, $contact);
 	
