@@ -1,5 +1,5 @@
 <?php
-
+// reads csv file and returns contents as array
 function readCSV($filename) {
 	$contents = [];
 	$handle = fopen($filename, 'r');
@@ -10,6 +10,7 @@ function readCSV($filename) {
 	return $contents;
 }
 
+// saves array as csv file 
 function saveCSV($filename, $contents) {
 	$handle = fopen($filename, 'w+');
 	foreach ($contents as $fields) {
@@ -18,11 +19,10 @@ function saveCSV($filename, $contents) {
 	fclose($handle);
 }
 
-// open csv for reading and assign to $addressBook array
+// set $addressBook to saved csv file
 $filename = 'data/address_book.csv';
 $addressBook = readCSV($filename);
 
-// var_dump($addressBook);
 
 // validate inputs, generate error messages
 $errorMessage = [];
@@ -46,7 +46,9 @@ if (!empty($_POST)) {
 	}
 	// set error message to string
 	$errorMessage = implode("\n", $errorMessage);
+	
 	// if passed validation, push new contact to $addressBook array
+	// prevent XSS
 	foreach ($_POST as $key => $value) {
 		$_POST[$key] = htmlspecialchars(strip_tags($value));
 	}
@@ -58,7 +60,8 @@ if (!empty($_POST)) {
 	saveCSV($filename, $addressBook);
 }
 
-if (!empty($_GET['remove'])) {
+// remove contact form $addressBook
+if (isset($_GET['remove'])) {
 	unset($addressBook[$_GET['remove']]);
 	saveCSV($filename, $addressBook);
 	header("Location: address_book.php");
