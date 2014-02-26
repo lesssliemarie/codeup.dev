@@ -1,15 +1,28 @@
 <?php
 
-// open csv for reading and assign to $addressBook array
-$handle = fopen('data/address_book.csv', 'r');
-$addressBook = [];
-while (($data = fgetcsv($handle)) !== FALSE) {
-	// var_dump($data);
-	$addressBook[] = $data;
+function readCSV($filename) {
+	$contents = [];
+	$handle = fopen($filename, 'r');
+	while (($data = fgetcsv($handle)) !== FALSE) {
+		$contents[] = $data;
+	}
+	fclose($handle);
+	return $contents;
 }
-fclose($handle);
 
-var_dump($addressBook);
+function saveCSV($filename, $contents) {
+	$handle = fopen($filename, 'w+');
+	foreach ($contents as $fields) {
+		fputcsv($handle, $fields);	
+	}
+	fclose($handle);
+}
+
+// open csv for reading and assign to $addressBook array
+$filename = 'data/address_book.csv';
+$addressBook = readCSV($filename);
+
+// var_dump($addressBook);
 
 // validate inputs, generate error messages
 $errorMessage = [];
@@ -38,11 +51,7 @@ if (!empty($_POST)) {
 	array_push($addressBook, $contact);
 	
 	// save new $addressBook array to csv
-	$handle = fopen('data/address_book.csv', 'w+');
-	foreach ($addressBook as $fields) {
-		fputcsv($handle, $fields);	
-	}
-	fclose($handle);
+	saveCSV($filename, $addressBook);
 }
 
 
