@@ -1,14 +1,16 @@
 <?php
 
 // store each form entry as an array of each input
-$handle = fopen('data/address_book.csv', 'w+');
+$handle = fopen('data/address_book.csv', 'r');
 $addressBook = [];
 while (($data = fgetcsv($handle)) !== FALSE) {
 	// var_dump($data);
 	$addressBook[] = $data;
 }
+fclose($handle);
 
 var_dump($addressBook);
+
 
 $errorMessage = [];
 if (!empty($_POST)) {
@@ -30,18 +32,17 @@ if (!empty($_POST)) {
 		array_push($errorMessage,"!! ZIP IS REQUIRED !!");
 	}
 	$errorMessage = implode("\n", $errorMessage);
+	
 	$contact = $_POST;
 	array_push($addressBook, $contact);
 	
+	$handle = fopen('data/address_book.csv', 'w+');
 	foreach ($addressBook as $fields) {
 		fputcsv($handle, $fields);	
 	}
-	
-	// header("Location: address_book.php");
+	fclose($handle);
 }
 
-
-fclose($handle);
 
 ?>
 <!DOCTYPE html>
