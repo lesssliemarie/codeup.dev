@@ -54,6 +54,13 @@ if (!empty($_POST)) {
 	saveCSV($filename, $addressBook);
 }
 
+if (!empty($_GET['remove'])) {
+	unset($addressBook[$_GET['remove']]);
+	saveCSV($filename, $addressBook);
+	header("Location: address_book.php");
+	exit(0);
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -72,11 +79,13 @@ if (!empty($_POST)) {
 			<th>Zip&nbsp;</th>
 			<th>Phone Number&nbsp;</th>
 		</tr>
-		<? foreach ($addressBook as $contacts): ?>
+		<? foreach ($addressBook as $contacts => $contact): ?>
 		<tr>
-			<? foreach ($contacts as $info): ?>
-					<td><?= $info; ?></td>
-			<? endforeach; endforeach; ?>
+			<? foreach ($contact as $info): ?>
+			<td><?= $info; ?></td>
+			<? endforeach; ?>
+			<td><a href="?remove=<?= $contacts; ?>">Remove Contact</a></td>
+			<? endforeach; ?>
 		</tr>	
 	</table>
 
