@@ -9,8 +9,6 @@ while (!feof($handle)) {
 
 var_dump($addressBook);
 
-fclose($handle);
-
 if (!empty($_POST)) {
 	$contact = $_POST;
 	array_push($addressBook, $contact);
@@ -19,6 +17,8 @@ if (!empty($_POST)) {
 		fputcsv($handle, $fields);	
 	}
 }
+
+fclose($handle);
 
 ?>
 <!DOCTYPE html>
