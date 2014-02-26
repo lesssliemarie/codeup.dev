@@ -1,22 +1,45 @@
 <?php
 
 // store each form entry as an array of each input
-$handle = fopen('data/address_book.csv', 'a+');
+$handle = fopen('data/address_book.csv', 'w+');
 $addressBook = [];
-while (!feof($handle)) {
-	$addressBook[] = fgetcsv($handle);
+while (($data = fgetcsv($handle)) !== FALSE) {
+	// var_dump($data);
+	$addressBook[] = $data;
 }
 
 var_dump($addressBook);
 
+$errorMessage = [];
 if (!empty($_POST)) {
+	if (empty($_POST['name'])) {
+		array_push($errorMessage, "!! NAME IS REQUIRED !!");
+	} 
+	if (empty($_POST['address'])) {
+		array_push($errorMessage,"!! ADDRESS IS REQUIRED !!");
+	}
+
+	if (empty($_POST['city'])) {
+		array_push($errorMessage,"!! CITY IS REQUIRED !!");
+	}
+
+	if (empty($_POST['state'])) {
+		array_push($errorMessage,"!! STATE IS REQUIRED !!");
+	}
+	if (empty($_POST['zip'])) {
+		array_push($errorMessage,"!! ZIP IS REQUIRED !!");
+	}
+	$errorMessage = implode("\n", $errorMessage);
 	$contact = $_POST;
 	array_push($addressBook, $contact);
 	
 	foreach ($addressBook as $fields) {
 		fputcsv($handle, $fields);	
 	}
+	
+	// header("Location: address_book.php");
 }
+
 
 fclose($handle);
 
@@ -46,6 +69,11 @@ fclose($handle);
 	</table>
 
 	<h2>Enter a New Contact:</h2>
+		<p style="color: red">
+		<? if (!empty($errorMessage)) : ?>
+				<?php echo $errorMessage; ?>
+				<? endif; ?>
+		</p>
 	<form method="POST" action="address_book.php">
 		<p>
 			<label for="name">Name:</label>
@@ -71,6 +99,7 @@ fclose($handle);
 			<label for="phone">Phone Number:</label>
 			<input id="phone" name="phone" type="text">
 		</p>
+
 		<button type="submit">Add Contact</button>
 	</form>
 
