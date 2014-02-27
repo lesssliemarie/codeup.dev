@@ -4,6 +4,11 @@ class AddressDataStore {
 
     public $filename = '';
 
+    function __construct($filename = 'data/address_book.csv') 
+    {
+    	$this->filename = $filename;
+    }
+
     function readCSV()
     {
         // read file $this->filename
@@ -29,8 +34,7 @@ class AddressDataStore {
 }
 
 // create instance of class
-$book1 = new AddressDataStore();
-$book1->filename = 'data/address_book.csv';
+$book1 = new AddressDataStore('data/address_book.csv');
 // set $addressBook to saved csv file
 $addressBook = $book1->readCSV();
 
@@ -38,23 +42,28 @@ $addressBook = $book1->readCSV();
 // validate inputs, generate error messages
 $errorMessage = [];
 if (!empty($_POST)) {
-	if (empty($_POST['name'])) {
-		array_push($errorMessage, "!! NAME IS REQUIRED !!");
-	} 
-	if (empty($_POST['address'])) {
-		array_push($errorMessage,"!! ADDRESS IS REQUIRED !!");
+	foreach ($_POST as $key) {
+		if (empty($key)) {
+			array_push($errorMessage, $key);
+		}
 	}
+	// if (empty($_POST['name'])) {
+	// 	array_push($errorMessage, "!! NAME IS REQUIRED !!");
+	// } 
+	// if (empty($_POST['address'])) {
+	// 	array_push($errorMessage,"!! ADDRESS IS REQUIRED !!");
+	// }
 
-	if (empty($_POST['city'])) {
-		array_push($errorMessage,"!! CITY IS REQUIRED !!");
-	}
+	// if (empty($_POST['city'])) {
+	// 	array_push($errorMessage,"!! CITY IS REQUIRED !!");
+	// }
 
-	if (empty($_POST['state'])) {
-		array_push($errorMessage,"!! STATE IS REQUIRED !!");
-	}
-	if (empty($_POST['zip'])) {
-		array_push($errorMessage,"!! ZIP IS REQUIRED !!");
-	}
+	// if (empty($_POST['state'])) {
+	// 	array_push($errorMessage,"!! STATE IS REQUIRED !!");
+	// }
+	// if (empty($_POST['zip'])) {
+	// 	array_push($errorMessage,"!! ZIP IS REQUIRED !!");
+	// }
 	// set error message to string
 	$errorMessage = implode("\n", $errorMessage);
 	
@@ -62,6 +71,9 @@ if (!empty($_POST)) {
 	// prevent XSS
 	foreach ($_POST as $key => $value) {
 		$_POST[$key] = htmlspecialchars(strip_tags($value));
+		if (empty($_POST[$key])) {
+			array_push($errorMessage, $key);
+		}
 	}
 
 	$contact = $_POST;
