@@ -89,15 +89,9 @@ if (count($_FILES) > 0) {
 		$filename = basename($_FILES['file1']['name']);
 		$savedFilename = $upload_dir . $filename;
 		move_uploaded_file($_FILES['file1']['tmp_name'], $savedFilename);
-		$upAddressBook = $book1->readCSV($savedFilename);
-
-		if ($_POST['overwrite'] == 'checked') {
-			$addressBook = $upAddressBook;
-		} else {
-			$addressBook = array_merge($addressBook, $upAddressBook);
-		}
-
-		$book1->saveCSV($addressBook);
+		$book2 = new AddressDataStore($savedFilename);
+		$upAddressBook = $book2->readCSV();
+		$book2->saveCSV($upAddressBook);
 	}
 }
 
@@ -172,10 +166,6 @@ if (count($_FILES) > 0) {
 		<p>
         	<label for="file1">Upload CSV File: </label>
         	<input id="file1" name="file1" type="file">
-    	</p>
-    	<p>
-        	<label for="overwrite">Overwrite uploaded file? </label>
-        	<input id="overwrite" name="overwrite" type="checkbox">
     	</p>
     	<button type="submit">Add File</button>
     </form>
