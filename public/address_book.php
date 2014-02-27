@@ -44,19 +44,31 @@ $addressBook = $book1->readCSV();
 // prevent XSS
 $requiredErrMessage = [];
 if (!empty($_POST)) {	
-	foreach ($_POST as $key => $value) {
-		$_POST[$key] = htmlspecialchars(strip_tags($value));
-		if (empty($_POST[$key])) {
+	
+	$entry = [];
+	$entry['name'] = $_POST['name'];
+	$entry['address'] = $_POST['address'];
+	$entry['city'] = $_POST['city'];
+	$entry['state'] = $_POST['state'];
+	$entry['zip'] = $_POST['zip'];
+
+	
+	foreach ($entry as $key => $value) {
+		if (empty($value)) {
 			array_push($requiredErrMessage, $key);
-		} else {
-			$contact = $_POST;
-			array_push($addressBook, $contact);
 		}
 	}
-	// prepare error message for display
-	$requiredErrMessage = 'REQUIRED FIELDS MISSING: ' . implode(", ", $requiredErrMessage);
-	// save new $addressBook array to csv
-	$book1->saveCSV($addressBook);
+
+	$entry['phone'] = $_POST['phone'];
+
+	foreach ($_POST as $key => $value) {
+		$_POST[$key] = htmlspecialchars(strip_tags($value));
+	}
+
+	if (empty($requiredErrMessage)) {
+		array_push($addressBook, array_values($entry));
+		$book1->saveCSV($addressBook);
+	}
 }
 
 // remove contact form $addressBook
@@ -79,7 +91,7 @@ if (count($_FILES) > 0) {
 		move_uploaded_file($_FILES['file1']['tmp_name'], $savedFilename);
 		$upAddressBook = $book1->readCSV($savedFilename);
 
-		if ($_POST['overwrite'] == TRUE) {
+		if ($_POST['overwrite'] == 'checked') {
 			$addressBook = $upAddressBook;
 		} else {
 			$addressBook = array_merge($addressBook, $upAddressBook);
@@ -122,8 +134,11 @@ if (count($_FILES) > 0) {
 		<p style="color: red">
 		<!-- output $errorMessage -->
 		<? if (!empty($requiredErrMessage)) : ?>
-				<?php echo $requiredErrMessage; ?>
-				<? endif; ?>
+			REQUIRED FIELDS MISSING: 
+			<? foreach ($requiredErrMessage as $message): ?>
+				<?= $message . ', '; ?>
+			<? endforeach; ?>
+		<? endif; ?>
 		</p>
 	<form method="POST" enctype="multipart/form-data" action="address_book.php">
 		<p>
