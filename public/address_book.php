@@ -42,19 +42,19 @@ $addressBook = $book1->readCSV();
 // validate inputs, generate error messages
 // if passed validation, push new contact to $addressBook array
 // prevent XSS
-$errorMessage = [];
+$requiredErrMessage = [];
 if (!empty($_POST)) {	
 	foreach ($_POST as $key => $value) {
 		$_POST[$key] = htmlspecialchars(strip_tags($value));
 		if (empty($_POST[$key])) {
-			array_push($errorMessage, $key);
+			array_push($requiredErrMessage, $key);
 		} else {
 			$contact = $_POST;
 			array_push($addressBook, $contact);
 		}
 	}
 	// prepare error message for display
-	$errorMessage = 'REQUIRED FIELDS MISSING: ' . implode(", ", $errorMessage);
+	$requiredErrMessage = 'REQUIRED FIELDS MISSING: ' . implode(", ", $requiredErrMessage);
 	// save new $addressBook array to csv
 	$book1->saveCSV($addressBook);
 }
@@ -66,6 +66,27 @@ if (isset($_GET['remove'])) {
 	$book1->saveCSV($addressBook);
 	header("Location: address_book.php");
 	exit(0);
+}
+
+$fileErrMessage = '';
+if (count($_FILES) > 0) {
+	if ($_FILES['file1']['error'] !== 0) {
+		$fileErrMessage = 'ERROR UPLOADING FILE.';
+	} else {
+		$upload_dir = '/vagrant/sites/codeup.dev/public/uploads/';
+		$filename = basename($_FILES['file1']['name']);
+		$savedFilename = $upload_dir . $filename;
+		move_uploaded_file($_FILES['file1']['tmp_name'], $savedFilename);
+		$upAddressBook = $book1->readCSV($savedFilename);
+
+		if ($_POST['overwrite'] == TRUE) {
+			$addressBook = $upAddressBook;
+		} else {
+			$addressBook = array_merge($addressBook, $upAddressBook);
+		}
+
+		$book1->saveCSV($addressBook);
+	}
 }
 
 
@@ -100,11 +121,11 @@ if (isset($_GET['remove'])) {
 	<h2>Enter a New Contact:</h2>
 		<p style="color: red">
 		<!-- output $errorMessage -->
-		<? if (!empty($errorMessage)) : ?>
-				<?php echo $errorMessage; ?>
+		<? if (!empty($requiredErrMessage)) : ?>
+				<?php echo $requiredErrMessage; ?>
 				<? endif; ?>
 		</p>
-	<form method="POST" action="address_book.php">
+	<form method="POST" enctype="multipart/form-data" action="address_book.php">
 		<p>
 			<label for="name">Name:</label>
 			<input id="name" name="name" type="text" autofocus="autofocus">
@@ -132,6 +153,16 @@ if (isset($_GET['remove'])) {
 
 		<button type="submit">Add Contact</button>
 	</form>
-
+	<form method="POST" enctype="multipart/form-data" action="address_book.php">
+		<p>
+        	<label for="file1">Upload CSV File: </label>
+        	<input id="file1" name="file1" type="file">
+    	</p>
+    	<p>
+        	<label for="overwrite">Overwrite uploaded file? </label>
+        	<input id="overwrite" name="overwrite" type="checkbox">
+    	</p>
+    	<button type="submit">Add File</button>
+    </form>
 </body>
 </html>
