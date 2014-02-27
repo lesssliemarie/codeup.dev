@@ -6,7 +6,7 @@ class AddressDataStore {
 
     function readCSV()
     {
-        // Code to read file $this->filename
+        // read file $this->filename
         $contents = [];
 		$handle = fopen($this->filename, 'r');
 		while (($data = fgetcsv($handle)) !== FALSE) {
@@ -18,7 +18,7 @@ class AddressDataStore {
 
     function saveCSV($contents) 
     {
-        // Code to write $contents array to file $this->filename
+        // write $contents array to file $this->filename
         $handle = fopen($this->filename, 'w+');
 		foreach ($contents as $fields) {
 		fputcsv($handle, $fields);	
