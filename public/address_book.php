@@ -18,7 +18,7 @@ class AddressDataStore {
 
     function saveCSV($contents) 
     {
-        // Code to write $addresses_array to file $this->filename
+        // Code to write $contents array to file $this->filename
         $handle = fopen($this->filename, 'w+');
 		foreach ($contents as $fields) {
 		fputcsv($handle, $fields);	
@@ -28,31 +28,10 @@ class AddressDataStore {
 
 }
 
-// reads csv file and returns contents as array
-// function readCSV($filename) {
-// 	$contents = [];
-// 	$handle = fopen($filename, 'r');
-// 	while (($data = fgetcsv($handle)) !== FALSE) {
-// 		$contents[] = $data;
-// 	}
-// 	fclose($handle);
-// 	return $contents;
-// }
-
-// // saves array as csv file 
-// function saveCSV($filename, $contents) {
-// 	$handle = fopen($filename, 'w+');
-// 	foreach ($contents as $fields) {
-// 		fputcsv($handle, $fields);	
-// 	}
-// 	fclose($handle);
-// }
-
-// set $addressBook to saved csv file
+// create instance of class
 $book1 = new AddressDataStore();
 $book1->filename = 'data/address_book.csv';
-// $filename = 'data/address_book.csv';
-// $addressBook = readCSV($filename);
+// set $addressBook to saved csv file
 $addressBook = $book1->readCSV();
 
 
@@ -89,13 +68,13 @@ if (!empty($_POST)) {
 	array_push($addressBook, $contact);
 	
 	// save new $addressBook array to csv
-	// saveCSV($filename, $addressBook);
 	$book1->saveCSV($addressBook);
 }
 
 // remove contact form $addressBook
 if (isset($_GET['remove'])) {
 	unset($addressBook[$_GET['remove']]);
+	// save $addressBook array to csv and redirect page
 	$book1->saveCSV($addressBook);
 	header("Location: address_book.php");
 	exit(0);
@@ -119,6 +98,7 @@ if (isset($_GET['remove'])) {
 			<th>Zip&nbsp;</th>
 			<th>Phone Number&nbsp;</th>
 		</tr>
+		<!-- display contacts from $addressBook in table -->
 		<? foreach ($addressBook as $contacts => $contact): ?>
 		<tr>
 			<? foreach ($contact as $info): ?>
@@ -131,6 +111,7 @@ if (isset($_GET['remove'])) {
 
 	<h2>Enter a New Contact:</h2>
 		<p style="color: red">
+		<!-- output $errorMessage -->
 		<? if (!empty($errorMessage)) : ?>
 				<?php echo $errorMessage; ?>
 				<? endif; ?>
