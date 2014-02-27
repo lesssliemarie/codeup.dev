@@ -98,13 +98,9 @@ if (count($_FILES) > 0) {
 			$addressBook = array_merge($addressBook, $upAddressBook);
 		}
 		
-		$book2->saveCSV($addressBook);
+		$book1->saveCSV($addressBook);
 	}
 }
-
-
-
-var_dump($_POST);
 
 ?>
 <!DOCTYPE html>
