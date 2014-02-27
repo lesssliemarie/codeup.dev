@@ -40,45 +40,21 @@ $addressBook = $book1->readCSV();
 
 
 // validate inputs, generate error messages
+// if passed validation, push new contact to $addressBook array
+// prevent XSS
 $errorMessage = [];
-if (!empty($_POST)) {
-	foreach ($_POST as $key) {
-		if (empty($key)) {
-			array_push($errorMessage, $key);
-		}
-	}
-	// if (empty($_POST['name'])) {
-	// 	array_push($errorMessage, "!! NAME IS REQUIRED !!");
-	// } 
-	// if (empty($_POST['address'])) {
-	// 	array_push($errorMessage,"!! ADDRESS IS REQUIRED !!");
-	// }
-
-	// if (empty($_POST['city'])) {
-	// 	array_push($errorMessage,"!! CITY IS REQUIRED !!");
-	// }
-
-	// if (empty($_POST['state'])) {
-	// 	array_push($errorMessage,"!! STATE IS REQUIRED !!");
-	// }
-	// if (empty($_POST['zip'])) {
-	// 	array_push($errorMessage,"!! ZIP IS REQUIRED !!");
-	// }
-	// set error message to string
-	$errorMessage = implode("\n", $errorMessage);
-	
-	// if passed validation, push new contact to $addressBook array
-	// prevent XSS
+if (!empty($_POST)) {	
 	foreach ($_POST as $key => $value) {
 		$_POST[$key] = htmlspecialchars(strip_tags($value));
 		if (empty($_POST[$key])) {
 			array_push($errorMessage, $key);
+		} else {
+			$contact = $_POST;
+			array_push($addressBook, $contact);
 		}
 	}
-
-	$contact = $_POST;
-	array_push($addressBook, $contact);
-	
+	// prepare error message for display
+	$errorMessage = 'REQUIRED FIELDS MISSING: ' . implode(", ", $errorMessage);
 	// save new $addressBook array to csv
 	$book1->saveCSV($addressBook);
 }
