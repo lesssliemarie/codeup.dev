@@ -1,27 +1,59 @@
 <?php
-// reads csv file and returns contents as array
-function readCSV($filename) {
-	$contents = [];
-	$handle = fopen($filename, 'r');
-	while (($data = fgetcsv($handle)) !== FALSE) {
-		$contents[] = $data;
-	}
-	fclose($handle);
-	return $contents;
+// create class to read and write csv files
+class AddressDataStore {
+
+    public $filename = '';
+
+    function readCSV()
+    {
+        // Code to read file $this->filename
+        $contents = [];
+		$handle = fopen($this->filename, 'r');
+		while (($data = fgetcsv($handle)) !== FALSE) {
+			$contents[] = $data;
+		}
+		fclose($handle);
+		return $contents;
+    }
+
+    function saveCSV($contents) 
+    {
+        // Code to write $addresses_array to file $this->filename
+        $handle = fopen($this->filename, 'w+');
+		foreach ($contents as $fields) {
+		fputcsv($handle, $fields);	
+		}
+		fclose($handle);
+    }
+
 }
 
-// saves array as csv file 
-function saveCSV($filename, $contents) {
-	$handle = fopen($filename, 'w+');
-	foreach ($contents as $fields) {
-		fputcsv($handle, $fields);	
-	}
-	fclose($handle);
-}
+// reads csv file and returns contents as array
+// function readCSV($filename) {
+// 	$contents = [];
+// 	$handle = fopen($filename, 'r');
+// 	while (($data = fgetcsv($handle)) !== FALSE) {
+// 		$contents[] = $data;
+// 	}
+// 	fclose($handle);
+// 	return $contents;
+// }
+
+// // saves array as csv file 
+// function saveCSV($filename, $contents) {
+// 	$handle = fopen($filename, 'w+');
+// 	foreach ($contents as $fields) {
+// 		fputcsv($handle, $fields);	
+// 	}
+// 	fclose($handle);
+// }
 
 // set $addressBook to saved csv file
-$filename = 'data/address_book.csv';
-$addressBook = readCSV($filename);
+$book1 = new AddressDataStore();
+$book1->filename = 'data/address_book.csv';
+// $filename = 'data/address_book.csv';
+// $addressBook = readCSV($filename);
+$addressBook = $book1->readCSV();
 
 
 // validate inputs, generate error messages
@@ -57,13 +89,14 @@ if (!empty($_POST)) {
 	array_push($addressBook, $contact);
 	
 	// save new $addressBook array to csv
-	saveCSV($filename, $addressBook);
+	// saveCSV($filename, $addressBook);
+	$book1->saveCSV($addressBook);
 }
 
 // remove contact form $addressBook
 if (isset($_GET['remove'])) {
 	unset($addressBook[$_GET['remove']]);
-	saveCSV($filename, $addressBook);
+	$book1->saveCSV($addressBook);
 	header("Location: address_book.php");
 	exit(0);
 }
