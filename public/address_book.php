@@ -31,6 +31,11 @@ class AddressDataStore {
 		fclose($handle);
     }
 
+    function __destruct() 
+    {
+    	echo 'Class Dismissed!';
+    }
+
 }
 
 // create instance of class
@@ -101,6 +106,8 @@ if (count($_FILES) > 0) {
 		$book1->saveCSV($addressBook);
 	}
 }
+
+unset($book1);
 
 ?>
 <!DOCTYPE html>
