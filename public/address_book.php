@@ -1,5 +1,5 @@
 <?php
-include('classes/address_data_store.php');
+require_once('classes/address_data_store.php');
 
 // create instance of class
 $book1 = new AddressDataStore('data/address_book.csv');
