@@ -23,7 +23,7 @@ $archives = read_file($archiveFile);
 $items = (filesize($file) > 0) ? read_file($file) : array();
 
 // add items to list
-if (!empty($_POST['newItem'])) {
+if (!empty($_POST['newItem']) && $_POST['fileO'] !== 'on') {
 	array_push($items, $_POST['newItem']);
 	save_file($file, $items);
 	header("Location: todo-list.php");
@@ -54,7 +54,7 @@ if (count($_FILES) > 0) {
 		move_uploaded_file($_FILES['file1']['tmp_name'], $saved_filename);
 		$fileContents = read_file($saved_filename);
 	
-		if ($_POST['fileO'] == TRUE) {
+		if (isset($_POST['fileO'])) {
 			$items = $fileContents;
 		} else {
 			$items = array_merge($items, $fileContents);
