@@ -1,18 +1,16 @@
 <?php
 require_once('classes/address_data_store.php');
-
 // create instance of class
 $book1 = new AddressDataStore('data/address_book.csv');
 // set $addressBook to saved csv file
 $addressBook = $book1->readBook();
 
-
 // validate inputs, generate error messages
 // if passed validation, push new contact to $addressBook array
 // prevent XSS
 $requiredErrMessage = [];
-if (!empty($_POST)) {	
-	
+if (!empty($_POST) && (isset($_POST['fileO'])) && $_POST['fileO']!='on') {	
+// if post is is not empty and postfile0 is not 	
 	$entry = [];
 	$entry['name'] = $_POST['name'];
 	$entry['address'] = $_POST['address'];
@@ -60,14 +58,14 @@ if (count($_FILES) > 0) {
 		$book2 = new AddressDataStore($savedFilename);
 		$upAddressBook = $book2->readBook();
 		
-		// if (isset($_POST['fileO'])) {
-		// 	$addressBook = $upAddressBook;
-		// 	echo 'HERE';
-		// } else {
-		// 	$addressBook = array_merge($addressBook, $upAddressBook);
-		// }
+		if (isset($_POST['fileO']) && $_POST['fileO'] == 'on') {
+			$addressBook = $upAddressBook;
+			echo 'HERE';
+		} else {
+			$addressBook = array_merge($addressBook, $upAddressBook);
+		}
 		
-		$book1->saveBook($upAddressBook);
+		$book1->saveBook($addressBook);
 	}
 }
 
@@ -142,10 +140,10 @@ if (count($_FILES) > 0) {
         	<label for="file1">Upload CSV File: </label>
         	<input id="file1" name="file1" type="file">
     	</p>
-    	<!-- <p>
+    	<p>
         	<label for="fileO">Overwrite file? </label>
-        	<input id="fileO" name="fileO" type="checkbox" value="overwrite">
-    	</p> -->
+        	<input id="fileO" name="fileO" type="checkbox">
+    	</p>
     	<button type="submit">Add Contact(s)</button>
     </form>
 </body>
