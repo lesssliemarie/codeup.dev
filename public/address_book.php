@@ -43,7 +43,7 @@ $addressBook = $book1->readCSV();
 // if passed validation, push new contact to $addressBook array
 // prevent XSS
 $requiredErrMessage = [];
-if (!empty($_POST) && $_POST['fileO'] !== 'on') {	
+if (!empty($_POST) && isset($_POST['fileO'])) {	
 	
 	$entry = [];
 	$entry['name'] = $_POST['name'];
@@ -94,6 +94,7 @@ if (count($_FILES) > 0) {
 		
 		if (isset($_POST['fileO'])) {
 			$addressBook = $upAddressBook;
+			echo 'HERE';
 		} else {
 			$addressBook = array_merge($addressBook, $upAddressBook);
 		}
@@ -140,7 +141,7 @@ if (count($_FILES) > 0) {
 			<? endforeach; ?>
 		<? endif; ?>
 		</p>
-	<form method="POST" action="address_book.php">
+	<form method="POST" enctype="multipart/form-data" action="address_book.php">
 		<p>
 			<label for="name">Name:</label>
 			<input id="name" name="name" type="text" autofocus="autofocus">
@@ -166,18 +167,18 @@ if (count($_FILES) > 0) {
 			<input id="phone" name="phone" type="text">
 		</p>
 
-		<button type="submit">Add Contact</button>
-	</form>
-	<form method="POST" enctype="multipart/form-data" action="address_book.php">
+		<!-- <button type="submit">Add Contact</button> -->
+	<!-- </form>
+	<form method="POST" enctype="multipart/form-data" action="address_book.php"> -->
 		<p>
         	<label for="file1">Upload CSV File: </label>
         	<input id="file1" name="file1" type="file">
     	</p>
     	<p>
         	<label for="fileO">Overwrite file? </label>
-        	<input id="fileO" name="fileO" type="checkbox">
+        	<input id="fileO" name="fileO" type="checkbox" value="overwrite">
     	</p>
-    	<button type="submit">Add File</button>
+    	<button type="submit">Add Contact(s)</button>
     </form>
 </body>
 </html>
