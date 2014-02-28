@@ -9,8 +9,13 @@ $addressBook = $book1->readBook();
 // if passed validation, push new contact to $addressBook array
 // prevent XSS
 $requiredErrMessage = [];
-if (!empty($_POST) && (isset($_POST['fileO'])) && $_POST['fileO']!='on') {	
-// if post is is not empty and postfile0 is not 	
+if (!empty($_POST)) {	
+// if post is is not empty and postfile0 is not 
+
+	if (isset($_POST['fileO']) && $_POST['fileO'] != 'on') {
+		break 2;
+	}	
+
 	$entry = [];
 	$entry['name'] = $_POST['name'];
 	$entry['address'] = $_POST['address'];
