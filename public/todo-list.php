@@ -10,7 +10,11 @@ $archiveFile = new Filestore('data/archives.txt');
 $archives = $archiveFile->readFile();
 
 // add items to list
-if (!empty($_POST['newItem']) && isset($_POST['fileO']) && $_POST['fileO'] !== 'on') {
+if (!empty($_POST['newItem'])) {
+
+	if (isset($_POST['fileO']) && $_POST['fileO'] != 'on') {
+		break 2;
+	}
 	array_push($items, $_POST['newItem']);
 	$list->saveFile($items);
 }
