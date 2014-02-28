@@ -1,48 +1,33 @@
 <?php
-// read from txt file, return array
-function read_file($file) {
-    $handle = fopen($file, "r");
-   	$contents = fread($handle, filesize($file));
-    fclose($handle);
-    return explode("\n", $contents); 	
-}
+require('classes/filestore.php');
 
-// save to array txt file
-function save_file($file, $array) {
-    $handle = fopen($file, 'w');
-    $saveList = implode("\n", $array);
-    fwrite($handle, $saveList);
-    fclose($handle);
-}
+// create instance of Filestore, create $items
+$list = new Filestore('data/todo_list.txt');
+$items = $list->readFile();
 
-// set file location
-$file = "data/todo_list.txt";
-$archiveFile = "data/archives.txt";
-$archives = read_file($archiveFile);
-// check that file is not empty
-$items = (filesize($file) > 0) ? read_file($file) : array();
+// create instance of Filestore, create $archives
+$archiveFile = new Filestore('data/archives.txt');
+$archives = $archiveFile->readFile();
 
 // add items to list
-if (!empty($_POST['newItem']) && $_POST['fileO'] !== 'on') {
+if (!empty($_POST['newItem'])) {
 	array_push($items, $_POST['newItem']);
-	save_file($file, $items);
-	header("Location: todo-list.php");
-	exit(0);
+	$list->saveFile($items);
 }
 
 // remove items from list
 if (isset($_GET['remove'])) {
 	$archiveItem = array_splice($items, $_GET['remove'], 1);
 	$archives = array_merge($archives, $archiveItem);
-	save_file($archiveFile, $archives);
-	save_file($file, $items);
+	$archiveFile->saveFile($archives);
+	$list->saveFile($items);
 	header("Location: todo-list.php");
 	exit(0);
 }
 
 $errorMessage = '';
 // upload file, if not empty and is text file
-if (count($_FILES) > 0) {
+if (empty($_POST['newItem']) && count($_FILES) > 0) {
 	if($_FILES['file1']['error'] != 0) {
 		$errorMessage = 'ERROR UPLOADING FILE.';
 	} elseif ($_FILES['file1']['type'] != 'text/plain') {
@@ -52,17 +37,16 @@ if (count($_FILES) > 0) {
 		$filename = basename($_FILES['file1']['name']);
 		$saved_filename = $upload_dir . $filename;
 		move_uploaded_file($_FILES['file1']['tmp_name'], $saved_filename);
-		$fileContents = read_file($saved_filename);
+		$uploadedList = new Filestore($saved_filename);
+		$fileContents = $uploadedList->readFile();
 	
-		if (isset($_POST['fileO'])) {
-			$items = $fileContents;
-		} else {
+		// if (isset($_POST['fileO'])) {
+		// 	$items = $fileContents;
+		// } else {
 			$items = array_merge($items, $fileContents);
-		}
+		// }
 
-		save_file($file, $items);		
-		header("Location: todo-list.php");
-		exit(0);
+		$list->saveFile($items);		
 	}
 }
 
@@ -99,9 +83,9 @@ if (count($_FILES) > 0) {
         		<input id="file1" name="file1" type="file">
     		</p>
     		<p>
-        		<label for="fileO">Overwrite file? </label>
+<!--         		<label for="fileO">Overwrite file? </label>
         		<input id="fileO" name="fileO" type="checkbox">
-    		</p>
+    		</p> -->
 
 			<button type="submit">Add Item(s)</button>
 		</form>
