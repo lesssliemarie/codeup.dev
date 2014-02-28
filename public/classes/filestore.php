@@ -13,18 +13,22 @@ class Filestore {
     /**
      * Returns array of lines in $this->filename
      */
-    function readLines()
+    function readFile()
     {
     	$handle = fopen($this->filename, "r");
-   		$contents = fread($handle, filesize($this->filename));
+    	if (filesize($this->filename) > 0) {
+    		$contents = fread($handle, filesize($this->filename));
+    		return explode("\n", $contents); 
+    	} else {
+    		return array();
+    	}
     	fclose($handle);
-    	return explode("\n", $contents); 
     }
 
     /**
      * Writes each element in $array to a new line in $this->filename
      */
-    function writeLines($array)
+    function saveFile($array)
     {
     	$handle = fopen($this->filename, 'w');
     	$saveList = implode("\n", $array);
