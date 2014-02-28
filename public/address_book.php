@@ -1,37 +1,5 @@
 <?php
-// create class to read and write csv files
-class AddressDataStore {
-
-    public $filename = '';
-
-    function __construct($filename = 'data/address_book.csv') 
-    {
-    	$this->filename = $filename;
-    }
-
-    function readCSV()
-    {
-        // read file $this->filename
-        $contents = [];
-		$handle = fopen($this->filename, 'r');
-		while (($data = fgetcsv($handle)) !== FALSE) {
-			$contents[] = $data;
-		}
-		fclose($handle);
-		return $contents;
-    }
-
-    function saveCSV($contents) 
-    {
-        // write $contents array to file $this->filename
-        $handle = fopen($this->filename, 'w+');
-		foreach ($contents as $fields) {
-		fputcsv($handle, $fields);	
-		}
-		fclose($handle);
-    }
-
-}
+include('classes/address_data_store.php');
 
 // create instance of class
 $book1 = new AddressDataStore('data/address_book.csv');
@@ -43,7 +11,7 @@ $addressBook = $book1->readCSV();
 // if passed validation, push new contact to $addressBook array
 // prevent XSS
 $requiredErrMessage = [];
-if (!empty($_POST) && isset($_POST['fileO'])) {	
+if (!empty($_POST)) {	
 	
 	$entry = [];
 	$entry['name'] = $_POST['name'];
@@ -92,12 +60,12 @@ if (count($_FILES) > 0) {
 		$book2 = new AddressDataStore($savedFilename);
 		$upAddressBook = $book2->readCSV();
 		
-		if (isset($_POST['fileO'])) {
-			$addressBook = $upAddressBook;
-			echo 'HERE';
-		} else {
-			$addressBook = array_merge($addressBook, $upAddressBook);
-		}
+		// if (isset($_POST['fileO'])) {
+		// 	$addressBook = $upAddressBook;
+		// 	echo 'HERE';
+		// } else {
+		// 	$addressBook = array_merge($addressBook, $upAddressBook);
+		// }
 		
 		$book1->saveCSV($addressBook);
 	}
@@ -174,10 +142,10 @@ if (count($_FILES) > 0) {
         	<label for="file1">Upload CSV File: </label>
         	<input id="file1" name="file1" type="file">
     	</p>
-    	<p>
+    	<!-- <p>
         	<label for="fileO">Overwrite file? </label>
         	<input id="fileO" name="fileO" type="checkbox" value="overwrite">
-    	</p>
+    	</p> -->
     	<button type="submit">Add Contact(s)</button>
     </form>
 </body>
