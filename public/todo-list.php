@@ -10,7 +10,7 @@ $archiveFile = new Filestore('data/archives.txt');
 $archives = $archiveFile->readFile();
 
 // add items to list
-if (!empty($_POST['newItem'])) {
+if (!empty($_POST['newItem']) && isset($_POST['fileO']) && $_POST['fileO'] !== 'on') {
 	array_push($items, $_POST['newItem']);
 	$list->saveFile($items);
 }
@@ -38,13 +38,13 @@ if (empty($_POST['newItem']) && count($_FILES) > 0) {
 		$saved_filename = $upload_dir . $filename;
 		move_uploaded_file($_FILES['file1']['tmp_name'], $saved_filename);
 		$uploadedList = new Filestore($saved_filename);
-		$fileContents = $uploadedList->readFile();
-	
-		// if (isset($_POST['fileO'])) {
-		// 	$items = $fileContents;
-		// } else {
+		$fileContents = $uploadedList->readFile();	
+		
+		if (isset($_POST['fileO'])) {
+			$items = $fileContents;
+		} else {
 			$items = array_merge($items, $fileContents);
-		// }
+		}
 
 		$list->saveFile($items);		
 	}
@@ -83,9 +83,9 @@ if (empty($_POST['newItem']) && count($_FILES) > 0) {
         		<input id="file1" name="file1" type="file">
     		</p>
     		<p>
-<!--         		<label for="fileO">Overwrite file? </label>
+        		<label for="fileO">Overwrite file? </label>
         		<input id="fileO" name="fileO" type="checkbox">
-    		</p> -->
+    		</p>
 
 			<button type="submit">Add Item(s)</button>
 		</form>
