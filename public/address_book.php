@@ -25,7 +25,6 @@ if (!empty($_POST)) {
 	
 	foreach ($entry as $key => $value) {
 		if (empty($value)) {
-			// array_push($requiredErrMessage, $key);
 			throw new Exception("$key is empty.");
 		} elseif (strlen($value) > 125) {
 			throw new Exception ("$key is greater than 125 characters.");
@@ -38,10 +37,8 @@ if (!empty($_POST)) {
 		$_POST[$key] = htmlspecialchars(strip_tags($value));
 	}
 
-	if (empty($requiredErrMessage)) {
 		array_push($addressBook, array_values($entry));
 		$book1->save($addressBook);
-	}
 } 
 
 // remove contact form $addressBook
