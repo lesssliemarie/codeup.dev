@@ -14,6 +14,24 @@ class Filestore {
         }
     }
 
+    public function read() 
+    {
+        if ($this->isCSV == TRUE) {
+            $this->readCSV();
+        } else {
+            $this->readFile();
+        }
+    }
+
+    public function write($contents) 
+    {
+        if ($this->isCSV == TRUE) {
+            $this->saveCSV($contents);
+        } else {
+            $this->saveFile($contents);
+        }
+    }
+
     // Returns array of lines in $this->filename
     function readFile()
     {
@@ -29,10 +47,10 @@ class Filestore {
 
 
     // Writes each element in $array to a new line in $this->filename
-    function saveFile($array)
+    function saveFile($contents)
     {
     	$handle = fopen($this->filename, 'w');
-    	$saveList = implode("\n", $array);
+    	$saveList = implode("\n", $contents);
     	fwrite($handle, $saveList);
     	fclose($handle);
     }
