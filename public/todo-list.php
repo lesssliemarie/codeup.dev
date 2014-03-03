@@ -10,12 +10,15 @@ $archiveFile = new Filestore('data/archives.txt');
 $archives = $archiveFile->read();
 // add items to list
 if (!empty($_POST['newItem'])) {
-
-	if (isset($_POST['fileO']) && $_POST['fileO'] != 'on') {
-		break 2;
+	if (strlen($_POST['newItem']) > 240) {
+		throw new Exception('The item you entered is greater than 240 characters!');
+	} else {
+		if (isset($_POST['fileO']) && $_POST['fileO'] != 'on') {
+			break 2;
+		}
+		array_push($items, $_POST['newItem']);
+		$list->save($items);
 	}
-	array_push($items, $_POST['newItem']);
-	$list->save($items);
 }
 
 // remove items from list
