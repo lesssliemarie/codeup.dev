@@ -3,16 +3,18 @@
 class Filestore {
 
     public $filename = '';
+    private $isCSV = FALSE;
 
     function __construct($filename = '') 
     {
         // Sets $this->filename
         $this->filename = $filename;
+        if (substr($filename, -3) == 'csv') {
+            $this->isCSV = TRUE;
+        }
     }
 
-    /**
-     * Returns array of lines in $this->filename
-     */
+    // Returns array of lines in $this->filename
     function readFile()
     {
     	$handle = fopen($this->filename, "r");
@@ -25,9 +27,8 @@ class Filestore {
     	fclose($handle);
     }
 
-    /**
-     * Writes each element in $array to a new line in $this->filename
-     */
+
+    // Writes each element in $array to a new line in $this->filename
     function saveFile($array)
     {
     	$handle = fopen($this->filename, 'w');
@@ -36,9 +37,7 @@ class Filestore {
     	fclose($handle);
     }
 
-    /**
-     * Reads contents of csv $this->filename, returns an array
-     */
+    // Reads contents of csv $this->filename, returns an array
     function readCSV()
     {
     	$contents = [];
@@ -50,9 +49,7 @@ class Filestore {
 		return $contents;
     }
 
-    /**
-     * Writes contents of $array to csv $this->filename
-     */
+    // Writes contents of $array to csv $this->filename
     function saveCSV($contents)
     {
         $handle = fopen($this->filename, 'w+');
