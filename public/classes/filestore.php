@@ -33,7 +33,7 @@ class Filestore {
     }
 
     // Returns array of lines in $this->filename
-    function readFile()
+    private function readFile()
     {
     	$handle = fopen($this->filename, "r");
     	if (filesize($this->filename) > 0) {
@@ -47,7 +47,7 @@ class Filestore {
 
 
     // Writes each element in $array to a new line in $this->filename
-    function saveFile($contents)
+    private function saveFile($contents)
     {
     	$handle = fopen($this->filename, 'w');
     	$saveList = implode("\n", $contents);
@@ -56,7 +56,7 @@ class Filestore {
     }
 
     // Reads contents of csv $this->filename, returns an array
-    function readCSV()
+    private function readCSV()
     {
     	$contents = [];
 		$handle = fopen($this->filename, 'r');
@@ -68,7 +68,7 @@ class Filestore {
     }
 
     // Writes contents of $array to csv $this->filename
-    function saveCSV($contents)
+    private function saveCSV($contents)
     {
         $handle = fopen($this->filename, 'w+');
 		foreach ($contents as $fields) {
