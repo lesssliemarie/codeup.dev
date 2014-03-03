@@ -3,7 +3,7 @@ require_once('classes/address_data_store.php');
 // create instance of class
 $book1 = new AddressDataStore('data/address_book.csv');
 // set $addressBook to saved csv file
-$addressBook = $book1->readBook();
+$addressBook = $book1->readCSV();
 
 // validate inputs, generate error messages
 // if passed validation, push new contact to $addressBook array
@@ -38,7 +38,7 @@ if (!empty($_POST)) {
 
 	if (empty($requiredErrMessage)) {
 		array_push($addressBook, array_values($entry));
-		$book1->saveBook($addressBook);
+		$book1->saveCSV($addressBook);
 	}
 }
 
@@ -46,7 +46,7 @@ if (!empty($_POST)) {
 if (isset($_GET['remove'])) {
 	unset($addressBook[$_GET['remove']]);
 	// save $addressBook array to csv and redirect page
-	$book1->saveBook($addressBook);
+	$book1->saveCSV($addressBook);
 	header("Location: address_book.php");
 	exit(0);
 }
@@ -61,7 +61,7 @@ if (count($_FILES) > 0) {
 		$savedFilename = $upload_dir . $filename;
 		move_uploaded_file($_FILES['file1']['tmp_name'], $savedFilename);
 		$book2 = new AddressDataStore($savedFilename);
-		$upAddressBook = $book2->readBook();
+		$upAddressBook = $book2->readCSV();
 		
 		if (isset($_POST['fileO']) && $_POST['fileO'] == 'on') {
 			$addressBook = $upAddressBook;
@@ -69,7 +69,7 @@ if (count($_FILES) > 0) {
 			$addressBook = array_merge($addressBook, $upAddressBook);
 		}
 		
-		$book1->saveBook($addressBook);
+		$book1->saveCSV($addressBook);
 	}
 }
 

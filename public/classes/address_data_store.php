@@ -8,17 +8,6 @@ class AddressDataStore extends Filestore {
         parent::__construct(strtolower($filename));       
     }
 
-    function readBook()
-    {
-        $contents = $this->readCSV($this->filename);
-        return $contents;
-    }
-
-    function saveBook($contents) 
-    {
-        $this->saveCSV($contents);
-    }
-
 }
 
 ?>
