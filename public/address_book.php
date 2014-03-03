@@ -14,31 +14,36 @@ if (!empty($_POST)) {
 	if (isset($_POST['fileO']) && $_POST['fileO'] != 'on') {
 		break 2;
 	}	
+	try {
+		$entry = [];
+		$entry['Name'] = $_POST['name'];
+		$entry['Address'] = $_POST['address'];
+		$entry['City'] = $_POST['city'];
+		$entry['State'] = $_POST['state'];
+		$entry['Zip'] = $_POST['zip'];
 
-	$entry = [];
-	$entry['name'] = $_POST['name'];
-	$entry['address'] = $_POST['address'];
-	$entry['city'] = $_POST['city'];
-	$entry['state'] = $_POST['state'];
-	$entry['zip'] = $_POST['zip'];
-
-	
-	foreach ($entry as $key => $value) {
-		if (empty($value)) {
-			throw new Exception("$key is empty.");
-		} elseif (strlen($value) > 125) {
-			throw new Exception ("$key is greater than 125 characters.");
+		
+		foreach ($entry as $key => $value) {
+			if (empty($value)) {
+				throw new Exception("$key is empty.");
+			} elseif (strlen($value) > 125) {
+				throw new Exception ("$key is greater than 125 characters.");
+			}
 		}
-	}
 
-	$entry['phone'] = $_POST['phone'];
+		$entry['phone'] = $_POST['phone'];
 
-	foreach ($_POST as $key => $value) {
-		$_POST[$key] = htmlspecialchars(strip_tags($value));
-	}
+		foreach ($_POST as $key => $value) {
+			$_POST[$key] = htmlspecialchars(strip_tags($value));
+		}
 
 		array_push($addressBook, array_values($entry));
 		$book1->save($addressBook);
+
+	} catch (Exception $e) {
+		echo $e->getMessage();
+	}
+	
 } 
 
 // remove contact form $addressBook
