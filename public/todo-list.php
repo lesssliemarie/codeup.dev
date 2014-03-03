@@ -3,12 +3,11 @@ require('classes/filestore.php');
 
 // create instance of Filestore, create $items
 $list = new Filestore('data/todo_list.txt');
-$items = $list->readFile();
+$items = $list->read();
 
 // create instance of Filestore, create $archives
 $archiveFile = new Filestore('data/archives.txt');
-$archives = $archiveFile->readFile();
-
+$archives = $archiveFile->read();
 // add items to list
 if (!empty($_POST['newItem'])) {
 
@@ -16,15 +15,15 @@ if (!empty($_POST['newItem'])) {
 		break 2;
 	}
 	array_push($items, $_POST['newItem']);
-	$list->saveFile($items);
+	$list->save($items);
 }
 
 // remove items from list
 if (isset($_GET['remove'])) {
 	$archiveItem = array_splice($items, $_GET['remove'], 1);
 	$archives = array_merge($archives, $archiveItem);
-	$archiveFile->saveFile($archives);
-	$list->saveFile($items);
+	$archiveFile->save($archives);
+	$list->save($items);
 	header("Location: todo-list.php");
 	exit(0);
 }
@@ -42,7 +41,7 @@ if (empty($_POST['newItem']) && count($_FILES) > 0) {
 		$saved_filename = $upload_dir . $filename;
 		move_uploaded_file($_FILES['file1']['tmp_name'], $saved_filename);
 		$uploadedList = new Filestore($saved_filename);
-		$fileContents = $uploadedList->readFile();	
+		$fileContents = $uploadedList->read();	
 		
 		if (isset($_POST['fileO'])) {
 			$items = $fileContents;
@@ -50,7 +49,7 @@ if (empty($_POST['newItem']) && count($_FILES) > 0) {
 			$items = array_merge($items, $fileContents);
 		}
 
-		$list->saveFile($items);		
+		$list->save($items);	
 	}
 }
 
