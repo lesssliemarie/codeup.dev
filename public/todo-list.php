@@ -10,16 +10,21 @@ $archiveFile = new Filestore('data/archives.txt');
 $archives = $archiveFile->read();
 // add items to list
 if (isset($_POST['newItem'])) {
-	if (strlen($_POST['newItem']) > 240) {
-		throw new Exception('The item you entered is greater than 240 characters!');
-	} elseif (empty($_POST['newItem'])) {
+	
+	try {
+		if (strlen($_POST['newItem']) > 240) {
+			throw new Exception('The item you entered is greater than 240 characters!');
+		} elseif (empty($_POST['newItem'])) {
 		throw new Exception('You did not enter an item.');
-	} else {
-		if (isset($_POST['fileO']) && $_POST['fileO'] != 'on') {
+		} else {
+			if (isset($_POST['fileO']) && $_POST['fileO'] != 'on') {
 			break 2;
+			}
+			array_push($items, $_POST['newItem']);
+			$list->save($items);
 		}
-		array_push($items, $_POST['newItem']);
-		$list->save($items);
+	} catch (Exception $e) {
+		$exceptionMessage = $e->getMessage();
 	}
 }
 
@@ -80,6 +85,11 @@ if (empty($_POST['newItem']) && count($_FILES) > 0) {
 			<p>
 				<label for="newItem">New Item:</label>
 				<input id="newItem" name="newItem" type="text" autofocus="autofocus">
+			</p>
+			<p>
+				<? if (!empty($exceptionMessage)) : ?>
+				<?= $exceptionMessage; ?>
+				<? endif; ?>
 			</p>
 			<p>
 				<? if (!empty($errorMessage)) : ?>
