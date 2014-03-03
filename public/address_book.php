@@ -10,7 +10,7 @@ $addressBook = $book1->read();
 // prevent XSS
 
 if (!empty($_POST)) {	
-// if post is is not empty and postfile0 is not 
+	// if post is is not empty and postfile0 is not 
 	if (isset($_POST['fileO']) && $_POST['fileO'] != 'on') {
 		break 2;
 	}	
@@ -110,7 +110,7 @@ if (count($_FILES) > 0) {
 			<? endforeach; ?>
 		<? endif; ?>
 		</p>
-	<form method="POST" enctype="multipart/form-data" action="address_book.php">
+	<form method="POST" action="address_book.php">
 		<p>
 			<label for="name">Name:</label>
 			<input id="name" name="name" type="text" autofocus="autofocus">
@@ -135,10 +135,9 @@ if (count($_FILES) > 0) {
 			<label for="phone">Phone Number:</label>
 			<input id="phone" name="phone" type="text">
 		</p>
-
-		<!-- <button type="submit">Add Contact</button> -->
-	<!-- </form>
-	<form method="POST" enctype="multipart/form-data" action="address_book.php"> -->
+		<button type="submit">Add Contact</button>
+	</form>
+	<form method="POST" enctype="multipart/form-data"  action="address_book.php">
 		<p>
         	<label for="file1">Upload CSV File: </label>
         	<input id="file1" name="file1" type="file">
@@ -147,7 +146,7 @@ if (count($_FILES) > 0) {
         	<label for="fileO">Overwrite file? </label>
         	<input id="fileO" name="fileO" type="checkbox">
     	</p>
-    	<button type="submit">Add Contact(s)</button>
+    	<button type="submit">Add File</button>
     </form>
 </body>
 </html>
