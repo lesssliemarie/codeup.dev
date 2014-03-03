@@ -11,7 +11,6 @@ $addressBook = $book1->read();
 $requiredErrMessage = [];
 if (!empty($_POST)) {	
 // if post is is not empty and postfile0 is not 
-
 	if (isset($_POST['fileO']) && $_POST['fileO'] != 'on') {
 		break 2;
 	}	
@@ -26,7 +25,10 @@ if (!empty($_POST)) {
 	
 	foreach ($entry as $key => $value) {
 		if (empty($value)) {
-			array_push($requiredErrMessage, $key);
+			// array_push($requiredErrMessage, $key);
+			throw new Exception("$key is empty.");
+		} elseif (strlen($value) > 125) {
+			throw new Exception ("$key is greater than 125 characters.");
 		}
 	}
 
@@ -40,7 +42,7 @@ if (!empty($_POST)) {
 		array_push($addressBook, array_values($entry));
 		$book1->save($addressBook);
 	}
-}
+} 
 
 // remove contact form $addressBook
 if (isset($_GET['remove'])) {
