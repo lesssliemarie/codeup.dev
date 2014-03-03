@@ -13,9 +13,9 @@ if (isset($_POST['newItem'])) {
 	
 	try {
 		if (strlen($_POST['newItem']) > 240) {
-			throw new Exception('The item you entered is greater than 240 characters!');
+			throw new Exception('The item you entered is greater than 240 characters');
 		} elseif (empty($_POST['newItem'])) {
-		throw new Exception('You did not enter an item.');
+		throw new Exception('You did not enter an item');
 		} else {
 			if (isset($_POST['fileO']) && $_POST['fileO'] != 'on') {
 			break 2;
@@ -42,9 +42,9 @@ $errorMessage = '';
 // upload file, if not empty and is text file
 if (empty($_POST['newItem']) && count($_FILES) > 0) {
 	if($_FILES['file1']['error'] != 0) {
-		$errorMessage = 'ERROR UPLOADING FILE.';
+		$errorMessage = 'ERROR UPLOADING FILE';
 	} elseif ($_FILES['file1']['type'] != 'text/plain') {
-		$errorMessage = 'ERROR: INVALID FILE TYPE.';
+		$errorMessage = 'ERROR: INVALID FILE TYPE';
 	} else {
 		$upload_dir = '/vagrant/sites/codeup.dev/public/uploads/';
 		$filename = basename($_FILES['file1']['name']);
@@ -81,19 +81,22 @@ if (empty($_POST['newItem']) && count($_FILES) > 0) {
 
 
 		<h3>Add a TODO List item:</h3>
-		<form method="POST" enctype="multipart/form-data" action="todo-list.php">
+		<form method="POST" action="todo-list.php">
 			<p>
 				<label for="newItem">New Item:</label>
 				<input id="newItem" name="newItem" type="text" autofocus="autofocus">
 			</p>
-			<p>
+			<p style="text-transform: uppercase; color: red;">
 				<? if (!empty($exceptionMessage)) : ?>
-				<?= $exceptionMessage; ?>
+				! <?= $exceptionMessage; ?> !
 				<? endif; ?>
 			</p>
-			<p>
+			<button type="submit">Add Item</button>
+		</form>	
+		<form method="POST" enctype="multipart/form-data" action="todo-list.php">
+			<p style="text-transform: uppercase; color: red;">
 				<? if (!empty($errorMessage)) : ?>
-				<?= $errorMessage; ?>
+				! <?= $errorMessage; ?> !
 				<? endif; ?>
 			</p>
 			<p>
@@ -104,8 +107,7 @@ if (empty($_POST['newItem']) && count($_FILES) > 0) {
         		<label for="fileO">Overwrite file? </label>
         		<input id="fileO" name="fileO" type="checkbox">
     		</p>
-
-			<button type="submit">Add Item(s)</button>
+			<button type="submit">Add File</button>
 		</form>
 
 </body>
