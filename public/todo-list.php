@@ -9,9 +9,11 @@ $items = $list->read();
 $archiveFile = new Filestore('data/archives.txt');
 $archives = $archiveFile->read();
 // add items to list
-if (!empty($_POST['newItem'])) {
+if (isset($_POST['newItem'])) {
 	if (strlen($_POST['newItem']) > 240) {
 		throw new Exception('The item you entered is greater than 240 characters!');
+	} elseif (empty($_POST['newItem'])) {
+		throw new Exception('You did not enter an item.');
 	} else {
 		if (isset($_POST['fileO']) && $_POST['fileO'] != 'on') {
 			break 2;
