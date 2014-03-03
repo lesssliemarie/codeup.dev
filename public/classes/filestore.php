@@ -5,7 +5,7 @@ class Filestore {
     public $filename = '';
     private $isCSV = FALSE;
 
-    function __construct($filename = '') 
+    public function __construct($filename = '') 
     {
         // Sets $this->filename
         $this->filename = $filename;
@@ -17,13 +17,13 @@ class Filestore {
     public function read() 
     {
         if ($this->isCSV == TRUE) {
-            $this->readCSV();
+            return $this->readCSV();
         } else {
-            $this->readFile();
+            return $this->readFile();
         }
     }
 
-    public function write($contents) 
+    public function save($contents) 
     {
         if ($this->isCSV == TRUE) {
             $this->saveCSV($contents);
@@ -38,7 +38,7 @@ class Filestore {
     	$handle = fopen($this->filename, "r");
     	if (filesize($this->filename) > 0) {
     		$contents = fread($handle, filesize($this->filename));
-    		return explode("\n", $contents); 
+            return explode("\n", $contents); 
     	} else {
     		return array();
     	}
