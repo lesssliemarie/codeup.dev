@@ -65,7 +65,6 @@ if (count($_FILES) > 0) {
 		
 		if (isset($_POST['fileO']) && $_POST['fileO'] == 'on') {
 			$addressBook = $upAddressBook;
-			echo 'HERE';
 		} else {
 			$addressBook = array_merge($addressBook, $upAddressBook);
 		}
