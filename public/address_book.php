@@ -42,7 +42,7 @@ if (!empty($_POST)) {
 		$book1->save($addressBook);
 
 	} catch (InvalidInputException $e) {
-		echo $e->getMessage();
+		$invalidInputMessage = $e->getMessage();
 	}
 	
 } 
@@ -109,11 +109,9 @@ if (count($_FILES) > 0) {
 	<h2>Enter a New Contact:</h2>
 		<p style="color: red">
 		<!-- output $errorMessage -->
-		<? if (!empty($requiredErrMessage)) : ?>
-			REQUIRED FIELDS MISSING: 
-			<? foreach ($requiredErrMessage as $message): ?>
-				<?= $message . ', '; ?>
-			<? endforeach; ?>
+		<? if (!empty($invalidInputMessage)) : ?>
+			REQUIRED FIELDS MISSING!
+				<?= $invalidInputMessage; ?>
 		<? endif; ?>
 		</p>
 	<form method="POST" action="address_book.php">
