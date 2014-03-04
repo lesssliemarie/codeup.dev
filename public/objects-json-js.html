@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Objects – JSON</title>
+</head>
+<body>
+	<script>
+		var books = [
+			{	
+				"title":"The Dude and the Zen Master",
+				"author": {
+					"firstName": "Jeff Bridges",
+					"lastName": "Bernie Glassman"
+				}
+			},
+			{	
+				"title":"Norwegian Wood",
+				"author": {
+					"firstName": "Haruki",
+					"lastName": "Murakami"
+				}
+			},
+			{	
+				"title":"Lionette",
+				"author": {
+					"firstName": "Anais",
+					"lastName": "Nin"
+				}
+			},
+			{	
+				"title":"The Unbearable Lightness of Being",
+				"author": {
+					"firstName": "Milan",
+					"lastName": "Kundera"
+				}
+			},
+			{	
+				"title":"BE HERE NOW",
+				"author": {
+					"firstName": "Ram",
+					"lastName": "Dass"
+				}
+			}
+		];
+
+		console.log(books);
+
+		books.forEach(function(element, index, array) {
+			console.log('Book # ' + index);
+			console.log('Title: ' + element['title']);
+			console.log('Author: ' + element['author']['firstName'] + ' ' + element['author']['lastName']);
+
+		});
+	</script>
+</body>
+</html>
