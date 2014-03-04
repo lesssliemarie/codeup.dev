@@ -1,5 +1,6 @@
 <?php
 require_once('classes/address_data_store.php');
+class InvalidInputException extends Exception {}
 // create instance of class
 $book1 = new AddressDataStore('data/address_book.csv');
 // set $addressBook to saved csv file
@@ -25,9 +26,9 @@ if (!empty($_POST)) {
 		
 		foreach ($entry as $key => $value) {
 			if (empty($value)) {
-				throw new Exception("$key is empty.");
+				throw new InvalidInputException("$key is empty.");
 			} elseif (strlen($value) > 125) {
-				throw new Exception ("$key is greater than 125 characters.");
+				throw new InvalidInputException ("$key is greater than 125 characters.");
 			}
 		}
 
@@ -40,7 +41,7 @@ if (!empty($_POST)) {
 		array_push($addressBook, array_values($entry));
 		$book1->save($addressBook);
 
-	} catch (Exception $e) {
+	} catch (InvalidInputException $e) {
 		echo $e->getMessage();
 	}
 	
