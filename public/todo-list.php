@@ -1,5 +1,6 @@
 <?php
 require('classes/filestore.php');
+class InvalidInputException extends Exception {}
 
 // create instance of Filestore, create $items
 $list = new Filestore('data/todo_list.txt');
@@ -13,9 +14,9 @@ if (isset($_POST['newItem'])) {
 	
 	try {
 		if (strlen($_POST['newItem']) > 240) {
-			throw new Exception('The item you entered is greater than 240 characters');
+			throw new InvalidInputException('The item you entered is greater than 240 characters');
 		} elseif (empty($_POST['newItem'])) {
-		throw new Exception('You did not enter an item');
+		throw new InvalidInputException('You did not enter an item');
 		} else {
 			if (isset($_POST['fileO']) && $_POST['fileO'] != 'on') {
 			break 2;
@@ -23,8 +24,8 @@ if (isset($_POST['newItem'])) {
 			array_push($items, $_POST['newItem']);
 			$list->save($items);
 		}
-	} catch (Exception $e) {
-		$exceptionMessage = $e->getMessage();
+	} catch (InvalidInputException $e) {
+		$invalidInputMessage = $e->getMessage();
 	}
 }
 
@@ -87,8 +88,8 @@ if (empty($_POST['newItem']) && count($_FILES) > 0) {
 				<input id="newItem" name="newItem" type="text" autofocus="autofocus">
 			</p>
 			<p style="text-transform: uppercase; color: red;">
-				<? if (!empty($exceptionMessage)) : ?>
-				! <?= $exceptionMessage; ?> !
+				<? if (!empty($invalidInputMessage)) : ?>
+				! <?= $invalidInputMessage; ?> !
 				<? endif; ?>
 			</p>
 			<button type="submit">Add Item</button>
