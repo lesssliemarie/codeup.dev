@@ -1,0 +1,48 @@
+body {
+	background-image: url('/img/gplaypattern.png');
+	background-repeat: repeat;
+}
+
+#container {
+	width: 470px;
+	background-color: #e5e5e5;
+	margin: auto;
+	font-family: Bubbler One;
+	text-align: center;
+	border: solid 1px #C5FF17;
+}
+
+h1 {
+	font-family: Codystar;
+	text-align: center;
+	margin: 0.1em;
+}
+
+h1 {
+	font-size: 4em;
+
+}
+
+a {
+	text-decoration: none;
+	color: #E79CF2;
+}
+
+a:hover {
+	text-decoration: underline;
+	color: #C5FF17;
+}
+
+ul {
+	border: dashed 1px #c9c9c9;
+	width: 400px;
+	margin: auto;
+	padding: 10px;
+	list-style: none;
+}
+
+form {
+	width: 380px;
+	margin: auto;
+	text-align: left;
+}

@@ -70,29 +70,34 @@ if (empty($_POST['newItem']) && count($_FILES) > 0) {
 <html>
 <head>
 	<title>TODO List</title>
+
+	<link rel="stylesheet" type="text/css" href="/css/todo-list.css">
+	<link href='http://fonts.googleapis.com/css?family=Unica+One' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Bubbler+One' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Codystar' rel='stylesheet' type='text/css'>
 </head>
 <body>
-
-	<h2>TODO List</h2>
+	<div id="container">
+	<h1>TODO List</h1>
 		<ul>
 			<? foreach ($items as $key => $item): ?>
-				<li><?= htmlspecialchars(strip_tags($item)); ?> <a href="?remove=<?= $key; ?>"> Mark Complete </a></li>
+				<li><?= htmlspecialchars(strip_tags($item)); ?> &nbsp;&nbsp;&nbsp; <a href="?remove=<?= $key; ?>"> COMPLETED </a></li>
 			<? endforeach; ?>
 		</ul>
 
 
-		<h3>Add a TODO List item:</h3>
+		<h2>Add a TODO List item:</h2>
 		<form method="POST" action="todo-list.php">
 			<p>
-				<label for="newItem">New Item:</label>
+				<label for="newItem">New Item:&nbsp;&nbsp;&nbsp;</label>
 				<input id="newItem" name="newItem" type="text" autofocus="autofocus">
+				<button type="submit">Add Item</button>
 			</p>
 			<p style="text-transform: uppercase; color: red;">
 				<? if (!empty($invalidInputMessage)) : ?>
 				! <?= $invalidInputMessage; ?> !
 				<? endif; ?>
-			</p>
-			<button type="submit">Add Item</button>
+			</p>			
 		</form>	
 		<form method="POST" enctype="multipart/form-data" action="todo-list.php">
 			<p style="text-transform: uppercase; color: red;">
@@ -101,15 +106,15 @@ if (empty($_POST['newItem']) && count($_FILES) > 0) {
 				<? endif; ?>
 			</p>
 			<p>
-        		<label for="file1">File to upload: </label>
+        		<label for="file1">File to upload:&nbsp;&nbsp;&nbsp; </label>
         		<input id="file1" name="file1" type="file">
     		</p>
     		<p>
         		<label for="fileO">Overwrite file? </label>
         		<input id="fileO" name="fileO" type="checkbox">
-    		</p>
-			<button type="submit">Add File</button>
+    			<button type="submit">Add File</button>
+    		</p>			
 		</form>
-
+	</div>
 </body>
 </html>
