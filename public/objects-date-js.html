@@ -44,6 +44,12 @@
 	// Log your birthday in the format: January 1, 2014 using Moment.js.
 	console.log('Here is my birthday using Moment.js: ' + momentBirthday);
 
+	// Find and log milliseconds passed since your birthday
+	var start = new Date(1990, 4, 16);
+	var end = Date.now();
+	var elapsed = end - start;
+	console.log('It has been ' + elapsed + ' milliseconds since the day I was born.');
+
 	</script>
 
 </body>
