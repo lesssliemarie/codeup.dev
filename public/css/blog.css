@@ -1,0 +1,55 @@
+html {
+	position: relative;
+	min-height: 100%;
+}
+
+body {
+	padding-bottom: 80px;
+	font-family: 'Source Sans Pro', sans-serif;
+}
+
+#cursive {
+	font-family: 'Petit Formal Script', cursive;
+}
+
+.navbar {
+	background-color: #C5FF17;
+	opacity: 0.4;
+	height: 70px;
+	margin-bottom: 20px;
+}
+
+#home {
+	text-align: center;
+	margin-top: 60px;
+}
+
+#footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 60px;
+	background-color: #C5FF17;
+	opacity: 0.4;
+	margin-top: 20px;
+}
+
+.btn {
+	background-color: #E79CF2;
+	border: none;
+}
+
+.btn:hover {
+	background-color: #c9c9c9;
+}
+
+.label {
+	background-color: #E79CF2;
+	border: none;
+}
+
+i {
+	font-size: 3em;
+	margin-right: 20px;
+	margin-top: 10px;
+}
