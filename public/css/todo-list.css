@@ -7,13 +7,13 @@ body {
 	width: 470px;
 	background-color: #e5e5e5;
 	margin: auto;
-	font-family: Bubbler One;
+	font-family: Bubbler One, sans-serif;
 	text-align: center;
 	border: solid 1px #C5FF17;
 }
 
 h1 {
-	font-family: Codystar;
+	font-family: Codystar, sans-serif;
 	text-align: center;
 	margin: 0.1em;
 }
