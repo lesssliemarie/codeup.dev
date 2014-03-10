@@ -40,7 +40,9 @@
         		listItems[i].style['color'] = 'grey';
         	}
 
-        	if (listItems[i].attributes['data-dbid'].value == '1') {
+        	var dbid = listItems[i].attributes['data-dbid'].value;
+
+        	if (dbid == '1') {
         		listItems[i].style['color'] = 'blue';
         	}
         }
