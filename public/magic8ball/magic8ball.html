@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>MAGIC 8-BALL</title>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+	<div class="container">
+ 			<h1>Ask the Magic 8-Ball</h1>
+  				<div class="input-group input-group-lg">
+  						<span class="input-group-addon">?</span>
+  						<input type="text" class="form-control" placeholder="Oh Magic 8-Ball..." id="question">
+				</div>
+ 			 <p><a class="btn btn-primary btn-lg" role="button" id="shake">Shake it</a></p>
+		</div>
+		<div id="ball">
+			<div id="triangle">
+				 <p id="answer"></p>
+			</div>
+		</div>
+	</div>
+	<script src="js/magic8ball.js" type="text/javascript"></script>
+	<script src="http://code.jquery.com/jquery-2.0.3.min.js" type="text/javascript"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	<script src="js/animo.js" type="text/javascript"></script>
+
+	<script>
+
+		$("#shake").click(function() {
+			var answer = ask8Ball();
+			console.log(answer);
+			$("#ball").effect("shake", { direction: "up", times: 4, distance: 5}, 500);
+			$("#triangle").effect("shake", { direction: "left", times: 4, distance: 5}, 500);
+			$("#answer").effect("shake", { direction: "right", times: 4, distance: 5}, 500);
+			$("#answer").text(answer);
+		})
+
+	</script>
+
+</body>
+</html>
+
+
+
