@@ -16,41 +16,61 @@
     <h2 id="sub-header">Hello Again.</h2>
     <p class="sub-paragraph">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
+    <button id="changeheader">Change Header</button><button id="changesubheader">Style Sub-Header</button><button id="changelist">Style List</button><button id="changepara">Change Paragraph Text</button>
+
     <script>
 
         // todo: get the main header element by id
         var mainHeader = document.getElementById('main-header');
 
-        // todo: set inner html of mainHeader to "JavaScript is Cool"
-        mainHeader.innerHTML = 'JavaScript is Cool';
+        // todo: set inner html of mainHeader to "JavaScript is Cool" on click of Change Header
+        var changeHeader = document.getElementById('changeheader');
+        changeHeader.addEventListener('click', function() {
+            mainHeader.innerHTML = 'JavaScript is Cool';
+        }, false);
 
+        
         // todo: get the sub header element by id
         var subHeader = document.getElementById('sub-header');
 
-        // todo: set the text color of subHeader to blue
-        subHeader.style['color'] = 'blue';
+        // todo: set the text color of subHeader to blue on click of Style Sub-Header
+        var changeSubheader = document.getElementById('changesubheader');
+        changeSubheader.addEventListener('click', function() {
+            subHeader.style['color'] = 'blue'; 
+        }, false);
 
+        
         // todo: get all list items
         var listItems = document.getElementsByTagName('li');
 
         // todo: set text color on every other list item to grey
         // todo: set text color of li with dbid = 1 to blue
-        for (var i=0; i < listItems.length; i++) {
+        // on click of Style List
+        var changeList = document.getElementById('changelist');
+        changeList.addEventListener('click', function() {
+            for (var i=0; i < listItems.length; i++) {
 
-        	var dbid = listItems[i].attributes['data-dbid'].value;
+                var dbid = listItems[i].attributes['data-dbid'].value;
 
-        	if (dbid == '1') {
-        		listItems[i].style['color'] = 'blue';
-        	} else if (i%2 == 0) {
-        		listItems[i].style['color'] = 'grey';
-        	}
-        }
+                if (dbid == '1') {
+                    listItems[i].style['color'] = 'blue';
+                } else if (i%2 == 0) {
+                    listItems[i].style['color'] = 'grey';
+                }
+            }
+        }, false);
+        
 
         // todo: get all elements with class name sub-paragraph
         var subParagraphs = document.getElementsByClassName('sub-paragraph');
 
         // todo: change the text in the first sub paragraph to "Mission Accomplished!"
-        subParagraphs[0].innerHTML = "<p>Mission Accomplished!</p>";
+        var changePara = document.getElementById('changepara');
+        changePara.addEventListener('click', function() {
+           subParagraphs[0].innerHTML = "<p>Mission Accomplished!</p>"; 
+       }, false);
+
+        
 
     </script>
 
