@@ -35,7 +35,7 @@ h1 {
 }
 
 td {
-	font-size: 11px;
+	font-size: 12px;
 }
 
 a#heading {
@@ -45,7 +45,6 @@ a#heading {
 
 body {
 	background-image: url('/img/arches.jpg');
-	background-position: fixed;
 }
 
 table {
@@ -74,12 +73,12 @@ table {
 	  			</th>
 	  			<th>Description</th>
 	  			<th>Date Established
-	  				<a href="?sort_column=date_established&amp;sort_order=asc"><span class="glyphicon glyphicon-sort-by-alphabet"></span></a>
-					<a href="?sort_column=date_established&amp;sort_order=desc"><span class="glyphicon glyphicon-sort-by-alphabet-alt"></span></a>
+	  				<a href="?sort_column=date_established&amp;sort_order=asc"><span class="glyphicon glyphicon-sort-by-order"></span></a>
+					<a href="?sort_column=date_established&amp;sort_order=desc"><span class="glyphicon glyphicon-sort-by-order-alt"></span></a>
 	  			</th>
 	  			<th>Area (acres)
-	  				<a href="?sort_column=area_in_acres&amp;sort_order=asc"><span class="glyphicon glyphicon-sort-by-alphabet"></span></a>
-					<a href="?sort_column=area_in_acres&amp;sort_order=desc"><span class="glyphicon glyphicon-sort-by-alphabet-alt"></span></a>
+	  				<a href="?sort_column=area_in_acres&amp;sort_order=asc"><span class="glyphicon glyphicon-sort-by-order"></span></a>
+					<a href="?sort_column=area_in_acres&amp;sort_order=desc"><span class="glyphicon glyphicon-sort-by-order-alt"></span></a>
 	  			</th>
 	  		</tr>
 
@@ -97,6 +96,7 @@ table {
 		</table>
 </div>
 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 </body>
 </html>
