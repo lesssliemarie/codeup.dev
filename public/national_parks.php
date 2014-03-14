@@ -31,6 +31,26 @@ if (!empty($_GET)) {
 <style>
 h1 {
 	text-align: center;
+	color: #20511b;
+}
+
+td {
+	font-size: 11px;
+}
+
+a#heading {
+	text-decoration: none;
+	color: #FFFFFF;
+}
+
+body {
+	background-image: url('/img/arches.jpg');
+	background-position: fixed;
+}
+
+table {
+	background-color: #FFFFFF;
+	opacity: 0.9;
 }
 
 </style>
@@ -38,18 +58,29 @@ h1 {
 </head>
 <body>
 <div class="container">
-	<h1>National Parks</h1>
+	<h1><a id="heading" href="national_parks.php">National Parks <span class="glyphicon glyphicon-tree-conifer"></span></a></h1>
 
-	<a href="?sort_column=name&amp;sort_order=asc">ASC</a>
-	<a href="?sort_column=name&amp;sort_order=desc">DESC</a>
+	
 
-		<table class="table table-striped">
+		<table class="table table-bordered">
 	  		<tr>
-	  			<th>Park Name</th>
-	  			<th>Location</th>
+	  			<th>Park Name<br>
+	  				<a href="?sort_column=name&amp;sort_order=asc"><span class="glyphicon glyphicon-sort-by-alphabet"></span></a>
+					<a href="?sort_column=name&amp;sort_order=desc"><span class="glyphicon glyphicon-sort-by-alphabet-alt"></span></a>
+				</th>
+	  			<th>Location
+	  				<a href="?sort_column=location&amp;sort_order=asc"><span class="glyphicon glyphicon-sort-by-alphabet"></span></a>
+					<a href="?sort_column=location&amp;sort_order=desc"><span class="glyphicon glyphicon-sort-by-alphabet-alt"></span></a>
+	  			</th>
 	  			<th>Description</th>
-	  			<th>Date Established</th>
-	  			<th>Area (acres)</th>
+	  			<th>Date Established
+	  				<a href="?sort_column=date_established&amp;sort_order=asc"><span class="glyphicon glyphicon-sort-by-alphabet"></span></a>
+					<a href="?sort_column=date_established&amp;sort_order=desc"><span class="glyphicon glyphicon-sort-by-alphabet-alt"></span></a>
+	  			</th>
+	  			<th>Area (acres)
+	  				<a href="?sort_column=area_in_acres&amp;sort_order=asc"><span class="glyphicon glyphicon-sort-by-alphabet"></span></a>
+					<a href="?sort_column=area_in_acres&amp;sort_order=desc"><span class="glyphicon glyphicon-sort-by-alphabet-alt"></span></a>
+	  			</th>
 	  		</tr>
 
 	 	<?php while ($parks = $result->fetch_assoc()): ?>
