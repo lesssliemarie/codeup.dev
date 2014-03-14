@@ -12,7 +12,12 @@ if ($mysqli->connect_errno) {
 
 
 // Retrieve a result set using SELECT
-$result = $mysqli->query("SELECT * FROM national_parks");
+
+if (!empty($_GET)) {
+	$result = $mysqli->query("SELECT * FROM national_parks ORDER BY {$_GET['sort_column']} {$_GET['sort_order']} ");
+} else {
+	$result = $mysqli->query("SELECT * FROM national_parks");
+}
 
 ?>
 
@@ -32,8 +37,12 @@ h1 {
 
 </head>
 <body>
+<div class="container">
 	<h1>National Parks</h1>
-	<div class="container">
+
+	<a href="?sort_column=name&amp;sort_order=asc">ASC</a>
+	<a href="?sort_column=name&amp;sort_order=desc">DESC</a>
+
 		<table class="table table-striped">
 	  		<tr>
 	  			<th>Park Name</th>
@@ -55,7 +64,7 @@ h1 {
 
 
 		</table>
-	</div>
+</div>
 
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 </body>
