@@ -12,9 +12,21 @@ if ($mysqli->connect_errno) {
 
 if (!empty($_GET)) {
 	$result = $mysqli->query("SELECT * FROM national_parks ORDER BY {$_GET['sort_column']} {$_GET['sort_order']} ");
-} else {
-	$result = $mysqli->query("SELECT * FROM national_parks");
-}
+} 
+
+// $sortCol = 'name';
+// $sortOrder = 'desc';
+// $validCols = ['name', etc];
+// if (!empty($_GET['sort_column'])) {
+// 	// check if in array
+// 	// if so, set to $sortCol
+// 	// if not, throw error?
+// }
+
+// if (!empty($_GET['sort_order'])) {
+// 	// if desc, set $sortOrder
+// }
+
 
 if (!empty($_POST)) {
 
@@ -54,6 +66,8 @@ if (!empty($_POST)) {
 	}
 }
 
+$result = $mysqli->query("SELECT * FROM national_parks");
+
 ?>
 
 <!DOCTYPE html>
@@ -77,6 +91,7 @@ a#heading {
 body {
 	background-image: url('/img/arches.jpg');
 	background-position: fixed;
+	background-repeat: no-repeat;
 }
 
 table {
