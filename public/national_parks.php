@@ -67,10 +67,6 @@ if (!empty($_POST)) {
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 
 <style>
-h1 {
-	text-align: center;
-	color: #20511b;
-}
 
 td {
 	font-size: 12px;
