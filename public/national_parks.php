@@ -24,15 +24,15 @@ if (!empty($_POST)) {
 	try {	
 		// Set variables
 		if (empty($_POST['name'])) {
-			throw new Exception('Park Name is empty');
+			throw new Exception('\'Park Name\' IS EMPTY. Please fill out again.');
 		} elseif (empty($_POST['location'])) {
-			throw new Exception('Location is empty');
+			throw new Exception('\'Location\' IS EMPTY. Please fill out again.');
 		} elseif (empty($_POST['description'])) {
-			throw new Exception('Description is empty');
+			throw new Exception('\'Description\' IS EMPTY. Please fill out again.');
 		} elseif (empty($_POST['date_established'])) {
-			throw new Exception('Date Established is empty');
+			throw new Exception('\'Date Established\' IS EMPTY. Please fill out again.');
 		} elseif (empty($_POST['area'])) {
-			throw new Exception('Area is empty');
+			throw new Exception('\'Area\' IS EMPTY. Please fill out again.');
 		} else {
 			$name = $_POST['name'];
 			$location = $_POST['location'];
@@ -40,20 +40,17 @@ if (!empty($_POST)) {
 			$date_established = $_POST['date_established'];	
 			$area_in_acres = $_POST['area'];
 
-			// // Create the prepared statement
-			// $stmt = $mysqli->prepare("INSERT INTO national_parks (name, location, description, date_established, area_in_acres) VALUES (?, ?, ?, ?, ?)");
+			// Create the prepared statement
+			$stmt = $mysqli->prepare("INSERT INTO national_parks (name, location, description, date_established, area_in_acres) VALUES (?, ?, ?, ?, ?)");
 
-			// // bind parameters
-			// $stmt->bind_param("ssssd", $name, $location, $description, $date_established, $area_in_acres);
+			// bind parameters
+			$stmt->bind_param("ssssd", $name, $location, $description, $date_established, $area_in_acres);
 
-			// // execute query, return result
-			// $stmt->execute();
+			// execute query, return result
+			$stmt->execute();
 
-			// // close connection
-			// $mysqli->close();
-
-			// echo 'Added to DB';
-			echo ('Passed');
+			// close connection
+			$mysqli->close();
 		}
 	} catch (Exception $e) {
 		$errorMessage = $e->getMessage();
@@ -95,7 +92,7 @@ table {
 }
 
 #addpark {
-	text-align: center;
+	float: right;
 }
 
 </style>
@@ -103,15 +100,12 @@ table {
 </head>
 <body>
 <div class="container">
-	<h1><a id="heading" href="national_parks.php">National Parks <span class="glyphicon glyphicon-tree-conifer"></span></a></h1>
+	<h1><a id="heading" href="national_parks.php">National Parks <span class="glyphicon glyphicon-tree-conifer"></span></a> <button id ="addpark" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Add Park</button> </h1>
 
-	<p><?php if(!empty($errorMessage)) {
-				echo $errorMessage;
-			} 
-		?>
-	</p>
-
-	<button id ="addpark" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Add Park</button>
+	<? if(!empty($errorMessage)): ?> 
+		<div class="alert alert-danger" data-dismiss="alert"><?= $errorMessage; ?>
+	</div>
+	<? endif; ?>
 
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
@@ -130,9 +124,9 @@ table {
 					<label for="description">Description</label>
 					<textarea id="description" name="description" class="form-control" rows="3"></textarea>
 					<label for="date_established">Date Established</label>
-					<input id="date_established" name="date_established" type="text" class="form-control">
+					<input id="date_established" name="date_established" type="text" class="form-control" placeholder="YYYY-MM-DD">
 					<label for="area">Area (acres)</label>
-					<input id="area" name="area" type="text" class="form-control"><hr>
+					<input id="area" name="area" type="text" class="form-control" placeholder="0000.00"><hr>
 					<p>
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 		        		<button type="submit" class="btn btn-primary">Add Park</button>
