@@ -79,6 +79,7 @@ a#heading {
 
 body {
 	background-image: url('/img/arches.jpg');
+	background-position: fixed;
 }
 
 table {
