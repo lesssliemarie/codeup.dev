@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>10 National Park FAQs</title>
+
+<style>
+body {
+	font-family: Arial, sans-serif;
+}
+
+.container {
+	margin: auto;
+	width: 800px;
+}
+
+dt {
+	font-size: 16px;
+}
+
+dd {
+	margin-bottom: 10px;
+}
+
+.invisible {
+	display: none;
+}
+
+</style>
+
+<script src="/js/jquery.js"></script>
+
+</head>
+<body>
+	<div class="container">
+		<h1>10 National Park FAQs</h1>
+		<a href="#" id="toggledd">TOGGLE FUN FACTS!</a>
+		<dl>
+			<dt><strong>Fun Fact No. 1:</strong></dt>
+				<dd>In the National Park System, there are 401 sites covering more than 84 million acres of land.</dd>
+			<dt><strong>Fun Fact No. 2:</strong></strong></dt>
+				<dd>There is a stretch of the Appalachian National Scenic Trail that exceeds 2,000 miles and travels from Maine to Georgia within the National Parks.</dd>
+			<dt><strong>Fun Fact No. 3:</strong></dt>
+				<dd>In 2012, more than 280 million people visited the National Parks.</dd>
+			<dt><strong>Fun Fact No. 4:</strong></dt>
+				<dd>The nation's deepest cave is 1,593 feet deep in New Mexico at Carlsbad Caverns National Park.</dd>
+			<dt><strong>Fun Fact No. 5:</strong></dt>
+				<dd>Species found In National Parks range from grizzly bears to Dall sheep, timber wolves to peregrine falcons, Pacific Boas to gray whales, and many more.</dd>
+			<dt><strong>Fun Fact No. 6:</strong></dt>
+				<dd>In the National Park System there are:
+					<ul>
+						<li>124 historical parks or sites</li>
+						<li>78 national monuments</li>
+						<li>59 national parks</li>
+						<li>25 battlefields or military parks</li>
+						<li>18 preserves</li>
+						<li>18 recreational areas</li>
+						<li>10 seashores</li>
+						<li>4 parkways</li>
+						<li>4 lakeshores</li>
+						<li>2 reserves</li>
+					</ul>
+				</dd>
+			<dt><strong>Fun Fact No. 7:</strong></dt>
+				<dd>The National Parks are home and habitat to more than 400 endangered or threatened plant and animal species.</dd>
+			<dt><strong>Fun Fact No. 8:</strong></dt>
+				<dd>Seneca Falls National Park in New York is the location of the First Women's Right Conventions, which discussed expanding rights of women in the mid-19th century.</dd>
+			<dt><strong>Fun Fact No. 9:</strong></dt>
+				<dd>There is 1 active volcano, thousands of petrified trees, and almost 300 waterfalls in Yellowstone National Park.</dd>
+			<dt><strong>Fun Fact No. 10:</strong></dt>
+				<dd>The largest living things in the world are in National Parks: Sequoia trees and Alaskan brown bears (the world's largest living carnivores).</dd>
+		</dl>
+	</div>
+
+<script>
+	$('dd').addClass('invisible');	
+
+	$('#toggledd').click(function() {
+		event.preventDefault();
+		$('dd').toggleClass('invisible');
+	});
+
+</script>
+</body>
+</html>
