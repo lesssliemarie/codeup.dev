@@ -4,23 +4,41 @@
 	<title>jQuery Exercises</title>
 
 <script src="/js/jquery.js"></script>
+<style>
+.clickable {
+	cursor: pointer;	
+}
 
+</style>
 </head>
 <body>
 	<div class="container">
-		<h1 class="codeup">Hello From My Bed</h1>
-			<p id="hipsteripsum">Tattooed Odd Future before they sold out keytar kitsch. +1 VHS Brooklyn semiotics Carles. Ethical jean shorts blog, cray kitsch fingerstache umami. Ethnic pug ugh, twee meh Thundercats chillwave yr photo booth. <span class="codeup">Hella ethical viral literally XOXO shabby chic, bitters Echo Park occupy mlkshk.</span> Four loko letterpress keytar, Shoreditch hoodie VHS salvia typewriter fingerstache. Post-ironic seitan chia Odd Future Brooklyn, cred church-key.</p>
+		<h1 class="clickable">Hello From My Bed</h1>
+			<p id="hipsteripsum" class="clickable">Tattooed Odd Future before they sold out keytar kitsch. +1 VHS Brooklyn semiotics Carles. Ethical jean shorts blog, cray kitsch fingerstache umami. Ethnic pug ugh, twee meh Thundercats chillwave yr photo booth. Hella ethical viral literally XOXO shabby chic, bitters Echo Park occupy mlkshk.Four loko letterpress keytar, Shoreditch hoodie VHS salvia typewriter fingerstache. Post-ironic seitan chia Odd Future Brooklyn, cred church-key.</p>
 
-			<ul id="hellolist">
-				<li>Hello</li>
-				<li>Bonjour</li>
-				<li>Hola!</li>
+			<ul>
+				<li class="clickable">Hello</li>
+				<li class="clickable">Bonjour</li>
+				<li class="clickable">Hola!</li>
 			</ul>
 	</div>
 <script>
-	$('li').css('font-size', '20px');
-	$('h1, p, li').css('background', '#FFFF00');
-	alert($('h1').html());
+	$('h1').click(function() {
+		$(this).css('background-color', '#0000FF');
+	});
+
+	$('p').dblclick(function() {
+		$(this).css('font-size', '22px');
+	});
+
+	$('li').hover(
+		function() {
+			$(this).css('color', '#FF0000');
+		},
+		function() {
+			$(this).css('color', '#FFFFFF');
+		}
+	);
 
 </script>
 
