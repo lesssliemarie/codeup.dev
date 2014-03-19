@@ -6,21 +6,20 @@
 <script src="/js/jquery.js"></script>
 <script>
 	$(document).ready(function() {
-	    var contents = $('#heading');
-	    alert(contents.html());
+	    $('.codeup').css('border', '1px solid red');
 	});
 </script>
 
 </head>
 <body>
 	<div class="container">
-		<h1 id="heading">Hello From My Bed</h1>
-			<p id="hipsteripsum">Tattooed Odd Future before they sold out keytar kitsch. +1 VHS Brooklyn semiotics Carles. Ethical jean shorts blog, cray kitsch fingerstache umami. Ethnic pug ugh, twee meh Thundercats chillwave yr photo booth. Hella ethical viral literally XOXO shabby chic, bitters Echo Park occupy mlkshk. Four loko letterpress keytar, Shoreditch hoodie VHS salvia typewriter fingerstache. Post-ironic seitan chia Odd Future Brooklyn, cred church-key.</p>
+		<h1 class="codeup">Hello From My Bed</h1>
+			<p id="hipsteripsum">Tattooed Odd Future before they sold out keytar kitsch. +1 VHS Brooklyn semiotics Carles. Ethical jean shorts blog, cray kitsch fingerstache umami. Ethnic pug ugh, twee meh Thundercats chillwave yr photo booth. <span class="codeup">Hella ethical viral literally XOXO shabby chic, bitters Echo Park occupy mlkshk.</span> Four loko letterpress keytar, Shoreditch hoodie VHS salvia typewriter fingerstache. Post-ironic seitan chia Odd Future Brooklyn, cred church-key.</p>
 
-			<ul id="heading">
-				<li class="hello">Hello</li>
-				<li class="hello">Bonjour</li>
-				<li class="hello">Hola!</li>
+			<ul id="hellolist">
+				<li class="codeup">Hello</li>
+				<li>Bonjour</li>
+				<li>Hola!</li>
 			</ul>
 	</div>
 </body>
