@@ -57,9 +57,6 @@ if (!empty($_POST)) {
 
 			// execute query, return result
 			$stmt->execute();
-
-			// close connection
-			$mysqli->close();
 		}
 	} catch (Exception $e) {
 		$errorMessage = $e->getMessage();
@@ -67,6 +64,8 @@ if (!empty($_POST)) {
 }
 
 $result = $mysqli->query("SELECT * FROM national_parks");
+// close connection
+$mysqli->close();
 
 ?>
 
