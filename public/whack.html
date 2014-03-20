@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Whackaroach</title>
+<script src="/js/jquery.js"></script>
+
+<style>
+#roach {
+	display: none;
+}
+
+</style>
+
+</head>
+<body>
+	<div class="container">
+		<img id="roach" src="/img/roach.png">
+	</div>
+
+<script>
+	$('#roach').fadeIn();
+	$('#roach').click(function() {
+		$(this).fadeOut();
+	});
+
+</script>
+
+</body>
+</html>
