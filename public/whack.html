@@ -6,14 +6,13 @@
 
 <style>
 .container {
-	margin-top: 50px;
-	margin-bottom: 30px;
 	text-align: center;
+	margin: auto;
 }
 
 #board {
-	width: 606px;
-	height: 606px;
+	width: 546px;
+	height: 546px;
 	z-index: 1;
 	margin: auto;
 }
@@ -41,6 +40,7 @@ img {
 <body>
 	<div class="container">
 		<h1>Whackaroach</h1>
+		<button id="start">START WHACKING</button>
 		<p>Score: <span id="#score">0<span><p>
 		<div id="board">
 			<div class="hole">
@@ -81,22 +81,27 @@ img {
 	// set score globally
 	var score = 0;
 
-	// set interval to run setRoach 2 seconds
-	setInterval(setRoach, 1500);
-	
-	// gets random roach img
-	// fades in and out at 2 seconds
-	// hides if roach is clicked
-	function setRoach() {
-		var roach = roaches[Math.floor(Math.random()*roaches.length)];
-			$(roach).fadeIn(1500, function() {
-				$(roach).click(function() {
-					$(roach).hide();
-					score += 1;
-					console.log(score);
+	// startWhacking when button clicked
+	$('#start').click(startWhacking);
+
+	function startWhacking() {
+		// set interval to run setRoach 2 seconds
+		setInterval(setRoach, 1500);
+		
+		// gets random roach img
+		// fades in and out at 2 seconds
+		// hides if roach is clicked
+		function setRoach() {
+			var roach = roaches[Math.floor(Math.random()*roaches.length)];
+				$(roach).fadeIn(1500, function() {
+					$(roach).click(function() {
+						$(roach).hide();
+						score += 1;
+						console.log(score);
+					});
+					$(roach).fadeOut(1500);
 				});
-				$(roach).fadeOut(1500);
-			});
+		}
 	}
 	
 
