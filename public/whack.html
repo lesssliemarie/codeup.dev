@@ -78,19 +78,24 @@ img {
 	// select all roaches globally
 	var roaches = $('.roach');
 
+	// set score globally
+	var score = 0;
+
 	// set interval to run setRoach 2 seconds
-	setInterval(setRoach, 2000);
+	setInterval(setRoach, 1500);
 	
 	// gets random roach img
 	// fades in and out at 2 seconds
 	// hides if roach is clicked
 	function setRoach() {
 		var roach = roaches[Math.floor(Math.random()*roaches.length)];
-			$(roach).fadeIn(2000, function() {
+			$(roach).fadeIn(1500, function() {
 				$(roach).click(function() {
 					$(roach).hide();
+					score += 1;
+					console.log(score);
 				});
-				$(roach).fadeOut(2000);
+				$(roach).fadeOut(1500);
 			});
 	}
 	
