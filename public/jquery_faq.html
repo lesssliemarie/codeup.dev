@@ -77,7 +77,7 @@ dd {
 	$('dd').addClass('invisible');	
 
 	// Toggle all facts at once
-	$('#toggledd').click(function() {
+	$('#toggledd').click(function(event) {
 		event.preventDefault();
 		$('dd').toggleClass('invisible');
 	});
