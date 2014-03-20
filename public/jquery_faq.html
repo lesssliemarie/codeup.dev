@@ -105,12 +105,12 @@ dd {
 	// Toggle all facts at once
 	$('#toggledd').click(function(event) {
 		event.preventDefault();
-		$('dd').fadeToggle();
+		$('dd').slideToggle();
 	});
 
 	// Chain .next to get child of dt and toggle
 	$('dt').click(function() {
-		$(this).next().fadeToggle();
+		$(this).next().slideToggle();
 	});
 
 	// Grab first li in each ul, make bold
@@ -120,7 +120,7 @@ dd {
 
 	// On click of h3, toggle fade list
 	$('h3').click(function() {
-		$(this).next().fadeToggle();
+		$(this).next().slideToggle();
 	});
 
 </script>
