@@ -100,13 +100,11 @@ dd {
 	</div>
 
 <script>
-	// Give all dd tags class of invisible
-	$('dd').addClass('invisible');	
 
 	// Toggle all facts at once
 	$('#toggledd').click(function(event) {
 		event.preventDefault();
-		$('dd').toggleClass('invisible');
+		$('dd').toggle('invisible');
 	});
 
 	// Chain .next to get child of dt and toggle
