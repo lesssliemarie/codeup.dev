@@ -13,8 +13,7 @@ body {
 	width: 800px;
 }
 
-dt {
-	font-size: 16px;
+dt, h3 {
 	cursor: pointer;
 }
 
@@ -117,8 +116,9 @@ dd {
 		$(this).children().first().css('font-weight', 'bold');
 	});
 
-	$('li').click(function() {
-		$(this).parent().hide();
+	// On click of h3, toggle fade list
+	$('h3').click(function() {
+		$(this).next().children().fadeToggle();
 	});
 
 </script>
