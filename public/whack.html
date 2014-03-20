@@ -5,13 +5,34 @@
 <script src="/js/jquery.js"></script>
 
 <style>
-#roach {
+.container {
+	margin-top: 50px;
+	margin-bottom: 30px;
+	text-align: center;
+}
+
+#board {
+	width: 606px;
+	height: 606px;
+	z-index: 1;
+	margin: auto;
+}
+
+.hole {
+	width: 180px;
+	height: 180px;
+	border: 1px solid #c5c5c5;
+	float: left;
+}
+
+.roach {
 	display: none;
 }
 
 img {
 	width: 161px;
 	height: 208px;
+	z-index: 2;
 }
 
 </style>
@@ -19,14 +40,60 @@ img {
 </head>
 <body>
 	<div class="container">
-		<img id="roach" src="/img/roach.png">
+		<h1>Whackaroach</h1>
+		<p>Score: <span id="#score">0<span><p>
+		<div id="board">
+			<div class="hole">
+				<img class="roach" src="/img/roach.png">
+			</div>
+			<div class="hole">
+				<img class="roach" src="/img/roach.png">
+			</div>
+			<div class="hole">
+				<img class="roach" src="/img/roach.png">
+			</div>
+			<div class="hole">
+				<img class="roach" src="/img/roach.png">
+			</div>
+			<div class="hole">
+				<img class="roach" src="/img/roach.png">
+			</div>
+			<div class="hole">
+				<img class="roach" src="/img/roach.png">
+			</div>
+			<div class="hole">
+				<img class="roach" src="/img/roach.png">
+			</div>
+			<div class="hole">
+				<img class="roach" src="/img/roach.png">
+			</div>
+			<div class="hole">
+				<img class="roach" src="/img/roach.png">
+			</div>
+			
+		</div>
 	</div>
 
 <script>
-	$('#roach').fadeIn();
-	$('#roach').click(function() {
-		$(this).fadeOut();
-	});
+	var roaches = $('.roach');
+
+	// set interval to run setRoach 2 seconds
+	setInterval(setRoach, 2000);
+	
+	// gets random roach img
+	// fades in and out at 2 seconds
+	// hides if roach is clicked
+	function setRoach() {
+		var roach = roaches[Math.floor(Math.random()*roaches.length)];
+			$(roach).fadeIn(2000, function() {
+				$(roach).click(function() {
+					$(roach).hide();
+				});
+				$(roach).fadeOut(2000);
+			});
+	}
+	
+
 
 </script>
 
