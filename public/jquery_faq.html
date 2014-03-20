@@ -99,6 +99,8 @@ dd {
 	</div>
 
 <script>
+	// Set dd to invisibile
+	$('dd').addClass('invisible');
 
 	// Toggle all facts at once
 	$('#toggledd').click(function(event) {
@@ -118,7 +120,7 @@ dd {
 
 	// On click of h3, toggle fade list
 	$('h3').click(function() {
-		$(this).next().children().fadeToggle();
+		$(this).next().fadeToggle();
 	});
 
 </script>
