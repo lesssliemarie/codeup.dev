@@ -66,6 +66,7 @@ img {
 				<tr><td>Time: <span id="timer">30</span></td></tr>
 				<tr><td id="highscore"></td></tr>
 				<tr><td>Whacks: <span id="score">0</span></td></tr>
+				<tr><td>Misses: <span id="misses">0</span></td></tr>
 			</table>
 		</div>
 		<div class="col-md-9">
@@ -110,6 +111,9 @@ img {
 	// set score globally
 	var score = 0;
 
+	// set misses
+	var misses = 0;
+
 	// set high score
 	var highscore = 0;
 
@@ -148,6 +152,7 @@ img {
 
 	function startWhacking() {
 		score = 0;
+		misses = 0;
 		speed = 2000;
 		$('#score').html(score);
 		// set interval to run setRoach 2 seconds		
@@ -164,12 +169,15 @@ img {
 		var roach = roaches[Math.floor(Math.random()*roaches.length)];
 		$(roach).fadeIn(speed/2);
 		$(roach).fadeOut(speed/2);
+		misses++;
+		$('#misses').html(misses);
 	}
 	
 	// hides if roach is clicked
 	$('.roach').click(function() {
 			$(this).hide();
 			++score;
+			misses -= 1;
 			$('#score').html(score);
 			if (speed > 200) {
 				speed -= 200;
