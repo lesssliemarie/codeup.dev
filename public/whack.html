@@ -40,8 +40,9 @@ img {
 <body>
 	<div class="container">
 		<h1>Whackaroach</h1>
+		<p id="gameover">GAME OVER! Whack some more?</p>
 		<button id="start">START WHACKING</button>
-		<p>Score: <span id="score">0<span><p>
+		<p>Score: <span id="score">0</span> | Time: <span id="timer">30</span><p>
 		<div id="board">
 			<div class="hole">
 				<img class="roach" src="/img/roach.png">
@@ -81,13 +82,44 @@ img {
 	// set score globally
 	var score = 0;
 
+	// set time
+	var time = 30;
+
+	// hide game over
+	$('#gameover').hide();
+
 	// startWhacking when button clicked
-	$('#start').click(startWhacking);
+	$('#start').click(function() {
+		startWhacking();
+		countdown();
+	});
+
+	// countdown time
+	function countdown() {
+		$('#gameover').hide();
+		time = 30;
+		var interval = setInterval(function() {
+			if (time > 0) {
+				--time;
+				$('#timer').html(time);
+			} else {
+				$('#gameover').show();
+				clearInterval(interval);
+			}
+		}, 1000);
+	}
 
 	function startWhacking() {
-		// set interval to run setRoach 2 seconds
-		setInterval(setRoach, 2000);
+		score = 0;
+		$('#score').html(score);
+		// set interval to run setRoach 2 seconds		
+		var interval = setInterval(setRoach, 2000);
+		setTimeout(function() {
+			clearInterval(interval);
+		}, 30000);
+		// countdown();
 	}
+
 
 	// gets random roach img
 	// fades in and out at 2 seconds
