@@ -109,13 +109,13 @@ img {
 	// set roach speed
 	var speed = 2000;
 
-	// startWhacking when button clicked
+	// startWhacking and countdown when button clicked
 	$('#start').click(function() {
 		startWhacking();
 		countdown();
 	});
 
-	// countdown time
+	// countdown game time
 	function countdown() {
 		$('#gameover').hide();
 		time = 30;
@@ -125,6 +125,7 @@ img {
 				$('#timer').html(time);
 			} else {
 				$('#gameover').show();
+				// Set and show high score
 				if (score > highscore) {
 					highscore = score;
 				}
