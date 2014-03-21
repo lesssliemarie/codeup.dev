@@ -17,8 +17,14 @@
 	display: none;
 }
 
+#start {
+	font-size: 20px;
+	margin-top: 20px;
+}
+
 #highscore {
 	display: none;
+	color: #FF0000;
 }
 
 #board {
@@ -56,8 +62,11 @@ img {
 			<h1>Whackaroach</h1>
 			<p id="gameover">GAME OVER! Whack some more?</p>
 			<p><button id="start" type="button" class="btn btn-default">START WHACKING</button></p>
-			<p>Score: <span id="score">0</span> | Time: <span id="timer">30</span><p>
-			<p id="highscore"></p>
+			<table class="table table-bordered">
+				<tr><td>Time: <span id="timer">30</span></td></tr>
+				<tr><td id="highscore"></td></tr>
+				<tr><td>Whacks: <span id="score">0</span></td></tr>
+			</table>
 		</div>
 		<div class="col-md-9">
 			<div id="board">
