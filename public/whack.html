@@ -10,6 +10,10 @@
 	margin: auto;
 }
 
+#gameover {
+	display: none;
+}
+
 #board {
 	width: 546px;
 	height: 546px;
@@ -84,9 +88,6 @@ img {
 
 	// set time
 	var time = 30;
-
-	// hide game over
-	$('#gameover').hide();
 
 	// startWhacking when button clicked
 	$('#start').click(function() {
