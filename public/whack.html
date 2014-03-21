@@ -14,6 +14,10 @@
 	display: none;
 }
 
+#highscore {
+	display: none;
+}
+
 #board {
 	width: 546px;
 	height: 546px;
@@ -47,6 +51,7 @@ img {
 		<p id="gameover">GAME OVER! Whack some more?</p>
 		<button id="start">START WHACKING</button>
 		<p>Score: <span id="score">0</span> | Time: <span id="timer">30</span><p>
+		<p id="highscore"></p>
 		<div id="board">
 			<div class="hole">
 				<img class="roach" src="/img/roach.png">
@@ -86,8 +91,14 @@ img {
 	// set score globally
 	var score = 0;
 
-	// set time
+	// set high score
+	var highscore = 0;
+
+	// set timer time
 	var time = 30;
+
+	// set roach speed
+	var speed = 2000;
 
 	// startWhacking when button clicked
 	$('#start').click(function() {
@@ -105,6 +116,11 @@ img {
 				$('#timer').html(time);
 			} else {
 				$('#gameover').show();
+				if (score > highscore) {
+					highscore = score;
+				}
+				$('#highscore').html('HIGH SCORE: ' + highscore);
+				$('#highscore').show();
 				clearInterval(interval);
 			}
 		}, 1000);
@@ -112,9 +128,10 @@ img {
 
 	function startWhacking() {
 		score = 0;
+		speed = 2000;
 		$('#score').html(score);
 		// set interval to run setRoach 2 seconds		
-		var interval = setInterval(setRoach, 2000);
+		var interval = setInterval(setRoach, speed);
 		setTimeout(function() {
 			clearInterval(interval);
 		}, 30000);
@@ -126,8 +143,8 @@ img {
 	// fades in and out at 2 seconds
 	function setRoach() {
 		var roach = roaches[Math.floor(Math.random()*roaches.length)];
-		$(roach).fadeIn(1000);
-		$(roach).fadeOut(1000);
+		$(roach).fadeIn(500);
+		$(roach).fadeOut(500);
 	}
 	
 	// hides if roach is clicked
@@ -135,6 +152,10 @@ img {
 			$(this).hide();
 			++score;
 			$('#score').html(score);
+			if (speed > 200) {
+				speed -= 200;
+			} 
+			console.log(speed);
 		});
 
 
