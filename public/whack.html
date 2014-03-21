@@ -41,7 +41,7 @@ img {
 	<div class="container">
 		<h1>Whackaroach</h1>
 		<button id="start">START WHACKING</button>
-		<p>Score: <span id="#score">0<span><p>
+		<p>Score: <span id="score">0<span><p>
 		<div id="board">
 			<div class="hole">
 				<img class="roach" src="/img/roach.png">
@@ -86,24 +86,23 @@ img {
 
 	function startWhacking() {
 		// set interval to run setRoach 2 seconds
-		setInterval(setRoach, 1500);
-		
-		// gets random roach img
-		// fades in and out at 2 seconds
-		// hides if roach is clicked
-		function setRoach() {
-			var roach = roaches[Math.floor(Math.random()*roaches.length)];
-				$(roach).fadeIn(1500, function() {
-					$(roach).click(function() {
-						$(roach).hide();
-						score += 1;
-						console.log(score);
-					});
-					$(roach).fadeOut(1500);
-				});
-		}
+		setInterval(setRoach, 2000);
+	}
+
+	// gets random roach img
+	// fades in and out at 2 seconds
+	function setRoach() {
+		var roach = roaches[Math.floor(Math.random()*roaches.length)];
+		$(roach).fadeIn(1000);
+		$(roach).fadeOut(1000);
 	}
 	
+	// hides if roach is clicked
+	$('.roach').click(function() {
+			$(this).hide();
+			++score;
+			$('#score').html(score);
+		});
 
 
 </script>
