@@ -3,11 +3,14 @@
 <head>
 	<title>Whackaroach</title>
 <script src="/js/jquery.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 
 <style>
 .container {
 	text-align: center;
 	margin: auto;
+	padding-top: 20px;
 }
 
 #gameover {
@@ -46,43 +49,49 @@ img {
 
 </head>
 <body>
-	<div class="container">
-		<h1>Whackaroach</h1>
-		<p id="gameover">GAME OVER! Whack some more?</p>
-		<button id="start">START WHACKING</button>
-		<p>Score: <span id="score">0</span> | Time: <span id="timer">30</span><p>
-		<p id="highscore"></p>
-		<div id="board">
-			<div class="hole">
-				<img class="roach" src="/img/roach.png">
+<div class="container">
+	<div class="row">
+		<div class="col-md-3">
+			<h1>Whackaroach</h1>
+			<p id="gameover">GAME OVER! Whack some more?</p>
+			<p><button id="start" type="button" class="btn btn-default">START WHACKING</button></p>
+			<p>Score: <span id="score">0</span> | Time: <span id="timer">30</span><p>
+			<p id="highscore"></p>
+		</div>
+		<div class="col-md-9">
+			<div id="board">
+				<div class="hole">
+					<img class="roach" src="/img/roach.png">
+				</div>
+				<div class="hole">
+					<img class="roach" src="/img/roach.png">
+				</div>
+				<div class="hole">
+					<img class="roach" src="/img/roach.png">
+				</div>
+				<div class="hole">
+					<img class="roach" src="/img/roach.png">
+				</div>
+				<div class="hole">
+					<img class="roach" src="/img/roach.png">
+				</div>
+				<div class="hole">
+					<img class="roach" src="/img/roach.png">
+				</div>
+				<div class="hole">
+					<img class="roach" src="/img/roach.png">
+				</div>
+				<div class="hole">
+					<img class="roach" src="/img/roach.png">
+				</div>
+				<div class="hole">
+					<img class="roach" src="/img/roach.png">
+				</div>
+				
 			</div>
-			<div class="hole">
-				<img class="roach" src="/img/roach.png">
-			</div>
-			<div class="hole">
-				<img class="roach" src="/img/roach.png">
-			</div>
-			<div class="hole">
-				<img class="roach" src="/img/roach.png">
-			</div>
-			<div class="hole">
-				<img class="roach" src="/img/roach.png">
-			</div>
-			<div class="hole">
-				<img class="roach" src="/img/roach.png">
-			</div>
-			<div class="hole">
-				<img class="roach" src="/img/roach.png">
-			</div>
-			<div class="hole">
-				<img class="roach" src="/img/roach.png">
-			</div>
-			<div class="hole">
-				<img class="roach" src="/img/roach.png">
-			</div>
-			
 		</div>
 	</div>
+</div>
 
 <script>
 	// select all roaches globally
@@ -135,7 +144,6 @@ img {
 		setTimeout(function() {
 			clearInterval(interval);
 		}, 30000);
-		// countdown();
 	}
 
 
