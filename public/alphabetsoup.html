@@ -1,26 +1,3 @@
-<?php
-	function alphabet_soup($str) {
-		// split string by word into an array
-		$strArray = str_word_count($str, 1);
-		$soupSentence = '';
-		// iterate over array 
-		foreach($strArray as $word) {
-			// split words into separate arrays and sort
-			$wordArray = str_split($word);
-			sort($wordArray);
-			// implode them back to strings and add to empty soupSentence
-			$word = implode('', $wordArray);
-			$soupSentence .= $word . ' ';
-			
-		}
-		return $soupSentence . PHP_EOL;
-	}
-
-	if(!empty($_GET)) {
-
-	}
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,19 +7,48 @@
 	<!-- JS -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-	<script src="/js/animate.js"></script>
+<!-- 	// <script src="/js/animate.js"></script> -->
 	<script src="/js/lettering.min.js"></script>
 	<script src="/js/textillate.js"></script>
 </head>
 <body>
+<div class="container">
+	<h1>Alphabet Soup</h1>
 
-	<form role="form" method="GET">
-	  <div class="form-group">
-	    <label for="userPhrase">Email address</label>
-	    <input type="text" class="form-control" id="userPhrase" placeholder="Enter word or phrase">
-	  </div>
-	  <button type="submit" class="btn btn-default">Soup It</button>
-	</form>
+
+	    <label for="userPhrase">Phrase</label>
+	    <input type="text" class="form-control" id="userPhrase" name="userPhrase" placeholder="Enter word or phrase">
+
+	  	<p><a id="soupit" class="btn btn-primary btn-md" role="button">Soup It</a></p>
+
+	<div id="soup"></div>
+</div>
+
+<script>
+
+	var souped = '';
+
+	$('#soupit').click(function() {
+		var soupIt = $('#userPhrase').val();
+		console.log(soupIt);
+		var splitSoup = soupIt.split(" ");
+		console.log(splitSoup);
+		
+		// .reverse().join("");
+
+		for (i = 0; i < splitSoup.length; i++) {
+			var splitWord = splitSoup[i].split("").reverse().join("");
+			console.log(splitWord);
+			souped = souped + splitWord + ' ';
+		}
+
+		console.log(souped);
+		$('#soup').replaceWith(souped);
+	});
+
+	
+
+</script>
 
 </body>
 </html>
