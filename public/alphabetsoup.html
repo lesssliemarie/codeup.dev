@@ -7,7 +7,7 @@
 	<!-- JS -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-<!-- 	// <script src="/js/animate.js"></script> -->
+	<link src="/css/animate.css" rel="stylesheet">
 	<script src="/js/lettering.min.js"></script>
 	<script src="/js/textillate.js"></script>
 </head>
@@ -30,20 +30,39 @@
 
 	$('#soupit').click(function() {
 		var soupIt = $('#userPhrase').val();
-		console.log(soupIt);
 		var splitSoup = soupIt.split(" ");
-		console.log(splitSoup);
-		
-		// .reverse().join("");
 
 		for (i = 0; i < splitSoup.length; i++) {
 			var splitWord = splitSoup[i].split("").reverse().join("");
-			console.log(splitWord);
 			souped = souped + splitWord + ' ';
 		}
 
 		console.log(souped);
-		$('#soup').replaceWith(souped);
+		$('#soup').replaceWith('<h2 class="tlt">' + souped + '</h2>');
+		$('.tlt').textillate({
+			autoStart: true,
+			outEffects: [ 'hinge' ],
+			in: {
+				effect: 'fadeInBigLeft',
+				delayScale: 1.5,
+				delay: 50,
+				shuffle: true,
+				callback: function () {}
+			},
+
+			out: {
+			    effect: 'hinge',
+			    delayScale: 1.5,
+			    delay: 50,
+			    sync: false,
+			    shuffle: false,
+			    reverse: false,
+			    callback: function () {}
+  			},
+  			
+  			callback: function () {}
+		});
+
 	});
 
 	
