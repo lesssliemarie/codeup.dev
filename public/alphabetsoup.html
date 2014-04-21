@@ -7,28 +7,70 @@
 	<!-- JS -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Sniglet' rel='stylesheet' type='text/css'>
 	<link src="/css/animate.css" rel="stylesheet">
 	<script src="/js/lettering.min.js"></script>
 	<script src="/js/jquery.textillate.js"></script>
+
+	<style>
+		body {
+			font-family: 'Sniglet', cursive;
+			text-align: center;
+		}
+
+		h1 {
+			font-size: 6em;
+			letter-spacing: 1em;
+		}
+
+		.container {
+			margin: auto;
+			padding-bottom: 20px;
+		}
+
+		#soupit {
+			margin-top: 10px;
+		}
+
+		#soupanother {
+			display: none;
+			text-align: center;
+			margin-top: 10px;
+		}
+
+	</style>
+
 </head>
 <body>
 <div class="container">
 	<h1>Alphabet Soup</h1>
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+	    	<input type="text" class="form-control" id="userPhrase" name="userPhrase" placeholder="Enter a word or phrase">
+	    	<p><a id="soupit" class="btn btn-primary btn-md" role="button">Soup It</a></p>
+	    </div>
+	    <div class="col-md-3"></div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div id="soup"></div>
+			<a id="soupanother" class="btn btn-primary btn-md" role="button">Soup Another!</a>
+		</div>
+	</div>
+	  		
+	  	
 
-
-	    <label for="userPhrase">Phrase</label>
-	    <input type="text" class="form-control" id="userPhrase" name="userPhrase" placeholder="Enter word or phrase">
-
-	  	<p><a id="soupit" class="btn btn-primary btn-md" role="button">Soup It</a></p>
-
-	<div id="soup"></div>
+	
 </div>
 
 <script>
-
+	
 	var souped = '';
+	
 
 	$('#soupit').click(function() {
+		souped = '';
 		var soupIt = $('#userPhrase').val();
 		var splitSoup = soupIt.split(" ");
 
@@ -40,29 +82,6 @@
 		console.log(souped);
 		$('#soup').replaceWith('<h1 class="tlt">' + souped + '</h1>');
 		$('.tlt').textillate({
-			  // the default selector to use when detecting multiple texts to animate
-			  selector: '.texts',
-
-			  // enable looping
-			  loop: false,
-
-			  // sets the minimum display time for each text before it is replaced
-			  minDisplayTime: 2000,
-
-			  // sets the initial delay before starting the animation
-			  // (note that depending on the in effect you may need to manually apply 
-			  // visibility: hidden to the element before running this plugin)
-			  initialDelay: 0,
-
-			  // set whether or not to automatically start animating
-			  autoStart: true,
-
-			  // custom set of 'in' effects. This effects whether or not the 
-			  // character is shown/hidden before or after an animation  
-			  inEffects: [],
-
-			  // custom set of 'out' effects
-			  outEffects: [ 'hinge' ],
 			in: {
 			    // set the effect name
 			    effect: 'fadeInLeftBig',
@@ -86,20 +105,12 @@
 
 			    // callback that executes once the animation has finished
 			    callback: function () {}
-			},
+			}
+		});
 
-			out: {
-			    effect: 'hinge',
-			    delayScale: 1.5,
-			    delay: 50,
-			    sync: false,
-			    shuffle: false,
-			    reverse: false,
-			    callback: function () {}
-  			},
-
-  			// callback that executes once textillate has finished 
-  			callback: function () {}
+		$('#soupanother').show();
+		$('#soupanother').click(function() {
+			location.reload();
 		});
 
 	});
